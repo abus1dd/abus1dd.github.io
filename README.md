@@ -1,6 +1,6 @@
 # abus1dd.github.io
 
-Personal portfolio of **Abu Bakar Siddiq**, ITS graduate in cybersecurity.
+Personal portfolio of **Abu Bakar Siddiq**, ITS graduate in cybersecurity, open to junior cybersecurity and AI roles.
 
 **Live:** https://abus1dd.github.io/
 
