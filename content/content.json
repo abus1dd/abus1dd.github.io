@@ -1,0 +1,713 @@
+{
+  "_meta": {
+    "description": "Single source of truth for all portfolio text. Every user-facing string has an 'en' and an 'it' version.",
+    "source": "Extracted from the original index.html on main (commit 72b0581) on 2026-10-26.",
+    "status": "EN copied verbatim from the live site. IT is a first translation by Claude and must be proofread by Abu.",
+    "languages": [
+      "en",
+      "it"
+    ],
+    "defaultLanguage": "en"
+  },
+  "site": {
+    "title": {
+      "en": "Abu Bakar Siddiq · Cybersecurity & AI Portfolio",
+      "it": "Abu Bakar Siddiq · Portfolio Cybersecurity & AI"
+    },
+    "description": {
+      "en": "Abu Bakar Siddiq, ITS graduate in cybersecurity, open to junior cybersecurity and AI roles. Web application security, vulnerability assessment and AI-driven security automation.",
+      "it": "Abu Bakar Siddiq, diplomato ITS in cybersecurity, disponibile per ruoli junior in cybersecurity e AI. Sicurezza delle applicazioni web, vulnerability assessment e automazione della sicurezza basata sull'AI."
+    },
+    "ogDescription": {
+      "en": "ITS cybersecurity graduate, open to junior cybersecurity and AI roles. Web app security, vulnerability assessment, AI-driven security automation.",
+      "it": "Diplomato ITS in cybersecurity, disponibile per ruoli junior in cybersecurity e AI. Sicurezza web, vulnerability assessment, automazione della sicurezza con l'AI."
+    },
+    "url": "https://abus1dd.github.io/",
+    "ogImage": "assets/og-image.png",
+    "favicon": "favicon.svg",
+    "monogram": "AS."
+  },
+  "nav": {
+    "about": {
+      "en": "About",
+      "it": "Chi sono"
+    },
+    "skills": {
+      "en": "Skills",
+      "it": "Competenze"
+    },
+    "journey": {
+      "en": "Journey",
+      "it": "Percorso"
+    },
+    "projects": {
+      "en": "Projects",
+      "it": "Progetti"
+    },
+    "contact": {
+      "en": "Contact",
+      "it": "Contatti"
+    },
+    "skipToContent": {
+      "en": "Skip to content",
+      "it": "Vai al contenuto"
+    },
+    "language": {
+      "en": "Language",
+      "it": "Lingua"
+    },
+    "theme": {
+      "en": "Day / night",
+      "it": "Giorno / notte"
+    }
+  },
+  "hero": {
+    "badge": {
+      "en": "Open to junior cybersecurity & AI roles",
+      "it": "Disponibile per ruoli junior in cybersecurity e AI"
+    },
+    "firstName": "Abu Bakar",
+    "lastName": "Siddiq",
+    "typedPrefix": {
+      "en": "Cybersecurity graduate into",
+      "it": "Diplomato in cybersecurity, appassionato di"
+    },
+    "typedPhrases": {
+      "en": [
+        "web app security",
+        "vulnerability assessment",
+        "AI agents",
+        "machine learning",
+        "security automation"
+      ],
+      "it": [
+        "sicurezza delle web app",
+        "vulnerability assessment",
+        "agenti AI",
+        "machine learning",
+        "automazione della sicurezza"
+      ]
+    },
+    "intro": {
+      "en": "ITS graduate in Cybersecurity who applies automation to security processes. Looking for a junior role in cybersecurity, AI, or where the two meet.",
+      "it": "Diplomato ITS in Cybersecurity, applico l'automazione ai processi di sicurezza. Cerco un ruolo junior in cybersecurity, AI o nel punto in cui si incontrano."
+    },
+    "ctaProjects": {
+      "en": "View projects",
+      "it": "Vedi i progetti"
+    },
+    "ctaCv": {
+      "en": "Download CV",
+      "it": "Scarica il CV"
+    },
+    "stats": [
+      {
+        "value": "3",
+        "label": {
+          "en": "languages",
+          "it": "lingue"
+        }
+      },
+      {
+        "value": "2",
+        "label": {
+          "en": "projects shipped",
+          "it": "progetti realizzati"
+        }
+      },
+      {
+        "value": "EQF 5",
+        "label": {
+          "en": "study level",
+          "it": "livello di studio"
+        }
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": {
+      "en": "01 / about",
+      "it": "01 / chi sono"
+    },
+    "title": {
+      "en": "Hands-on security work, backed by tools I build myself",
+      "it": "Sicurezza sul campo, supportata da strumenti che sviluppo io"
+    },
+    "paragraphs": [
+      {
+        "en": "I hold a Higher Technical Diploma in Cybersecurity from ITS Academy Adriano Olivetti (2026). During my internship at Nabla2 I combined application and infrastructure security work with automation tools I developed, to make security processes faster and more efficient.",
+        "it": "Ho conseguito il Diploma di Tecnico Superiore in Cybersecurity presso l'ITS Academy Adriano Olivetti (2026). Durante il tirocinio in Nabla2 ho unito attività di sicurezza applicativa e infrastrutturale a strumenti di automazione sviluppati da me, per rendere i processi di sicurezza più rapidi ed efficienti."
+      },
+      {
+        "en": "I also work with Docker, cloud platforms (Google Cloud, AWS) and machine learning. I'm looking for a junior role in cybersecurity, artificial intelligence, or the intersection of the two.",
+        "it": "Lavoro anche con Docker, piattaforme cloud (Google Cloud, AWS) e machine learning. Cerco un ruolo junior in cybersecurity, intelligenza artificiale o all'incrocio tra le due."
+      }
+    ],
+    "tags": [
+      {
+        "en": "Web App Security",
+        "it": "Sicurezza web app"
+      },
+      {
+        "en": "Vulnerability Assessment",
+        "it": "Vulnerability Assessment"
+      },
+      {
+        "en": "AI / ML",
+        "it": "AI / ML"
+      },
+      {
+        "en": "Security Automation",
+        "it": "Automazione della sicurezza"
+      },
+      {
+        "en": "Linux",
+        "it": "Linux"
+      }
+    ],
+    "card": {
+      "name": "Abu Bakar Siddiq",
+      "role": {
+        "en": "Cybersecurity & AI",
+        "it": "Cybersecurity & AI"
+      },
+      "location": {
+        "en": "Vignola, Italy",
+        "it": "Vignola, Italia"
+      },
+      "availability": {
+        "en": "Open to junior roles",
+        "it": "Disponibile per ruoli junior"
+      },
+      "languagesShort": "IT · EN · BN"
+    }
+  },
+  "skills": {
+    "eyebrow": {
+      "en": "02 / toolkit",
+      "it": "02 / strumenti"
+    },
+    "title": {
+      "en": "Skills & technologies",
+      "it": "Competenze e tecnologie"
+    },
+    "groups": [
+      {
+        "name": {
+          "en": "Security & Systems",
+          "it": "Sicurezza e sistemi"
+        },
+        "items": [
+          "Kali Linux",
+          "Linux",
+          "Networking",
+          "Vulnerability Assessment",
+          "Web Application Security",
+          "DevSecOps",
+          "MySQL"
+        ]
+      },
+      {
+        "name": {
+          "en": "AI, Code & Cloud",
+          "it": "AI, codice e cloud"
+        },
+        "items": [
+          "Python",
+          "Artificial Intelligence",
+          "Machine Learning",
+          "Docker",
+          "Git",
+          "Google Cloud",
+          "AWS",
+          "Process Automation",
+          "Software Prototyping"
+        ],
+        "itemsIt": [
+          "Python",
+          "Intelligenza artificiale",
+          "Machine Learning",
+          "Docker",
+          "Git",
+          "Google Cloud",
+          "AWS",
+          "Automazione dei processi",
+          "Prototipazione software"
+        ]
+      },
+      {
+        "name": {
+          "en": "Soft Skills",
+          "it": "Soft skill"
+        },
+        "items": [
+          "Teamwork",
+          "Autonomy",
+          "Adaptability"
+        ],
+        "itemsIt": [
+          "Lavoro di squadra",
+          "Autonomia",
+          "Adattabilità"
+        ]
+      }
+    ]
+  },
+  "journey": {
+    "eyebrow": {
+      "en": "03 / journey",
+      "it": "03 / percorso"
+    },
+    "title": {
+      "en": "Experience & education",
+      "it": "Esperienza e formazione"
+    },
+    "tabs": {
+      "overview": {
+        "en": "Overview",
+        "it": "Panoramica"
+      },
+      "experience": {
+        "en": "Experience",
+        "it": "Esperienza"
+      },
+      "education": {
+        "en": "Education",
+        "it": "Formazione"
+      },
+      "certifications": {
+        "en": "Certifications",
+        "it": "Certificazioni"
+      },
+      "awards": {
+        "en": "Awards",
+        "it": "Premi"
+      },
+      "seeAll": {
+        "en": "See all",
+        "it": "Vedi tutto"
+      }
+    },
+    "experience": [
+      {
+        "id": "nabla2",
+        "period": {
+          "en": "Apr – Jul 2026",
+          "it": "Apr – Lug 2026"
+        },
+        "title": {
+          "en": "Cybersecurity & Software Dev Internship",
+          "it": "Tirocinio in Cybersecurity e Sviluppo Software"
+        },
+        "org": "Nabla2 s.r.l.",
+        "location": {
+          "en": "Modena, Italy",
+          "it": "Modena, Italia"
+        },
+        "summary": {
+          "en": "Web app security, OpenVAS assessments, AD migration and agentic tooling.",
+          "it": "Sicurezza delle web app, assessment con OpenVAS, migrazione AD e strumenti agentici."
+        },
+        "highlights": [
+          {
+            "en": "Secured a healthcare web application: CSRF/XSS mitigation and rate limiting on authentication.",
+            "it": "Messa in sicurezza di un'applicazione web in ambito sanitario: mitigazione CSRF/XSS e rate limiting sull'autenticazione."
+          },
+          {
+            "en": "Vulnerability assessment with OpenVAS, plus an automatic VA report generator I built.",
+            "it": "Vulnerability assessment con OpenVAS e un generatore automatico di report VA sviluppato da me."
+          },
+          {
+            "en": "Migrated Samba / Active Directory domain controllers.",
+            "it": "Migrazione dei domain controller Samba / Active Directory."
+          },
+          {
+            "en": "Built an agentic resolver that analyses and fixes GitLab issues automatically.",
+            "it": "Sviluppo di un resolver agentico che analizza e risolve automaticamente le issue di GitLab."
+          },
+          {
+            "en": "Digital forensics: data recovery and OS restore on a compromised laptop.",
+            "it": "Digital forensics: recupero dati e ripristino del sistema operativo su un portatile compromesso."
+          }
+        ],
+        "tags": [
+          "web app security",
+          "vulnerability assessment",
+          "Linux / AD",
+          "agentic tooling",
+          "forensics"
+        ],
+        "overviewSummary": {
+          "en": "Web app security, OpenVAS assessments, AD migration and agentic tooling.",
+          "it": "Sicurezza delle web app, assessment con OpenVAS, migrazione AD e strumenti agentici."
+        }
+      },
+      {
+        "id": "europroyectos",
+        "period": {
+          "en": "Jul – Oct 2025",
+          "it": "Lug – Ott 2025"
+        },
+        "title": {
+          "en": "Erasmus+ Traineeship",
+          "it": "Tirocinio Erasmus+"
+        },
+        "org": "Europroyectos Erasmus Plus",
+        "location": {
+          "en": "Málaga, Spain",
+          "it": "Málaga, Spagna"
+        },
+        "summary": {
+          "en": "Built and maintained responsive web pages, applying application-security principles to find and fix common vulnerabilities. SEO work and daily collaboration in English in a multicultural team.",
+          "it": "Realizzazione e manutenzione di pagine web responsive, applicando i principi di sicurezza applicativa per individuare e correggere le vulnerabilità più comuni. Attività SEO e collaborazione quotidiana in inglese in un team multiculturale."
+        },
+        "tags": [
+          "erasmus+",
+          "web security"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "id": "its",
+        "period": {
+          "en": "2024 – 2026",
+          "it": "2024 – 2026"
+        },
+        "title": {
+          "en": "Higher Technical Diploma in Cybersecurity",
+          "it": "Diploma di Tecnico Superiore in Cybersecurity"
+        },
+        "org": "ITS Academy Adriano Olivetti",
+        "location": {
+          "en": "Bologna, Italy",
+          "it": "Bologna, Italia"
+        },
+        "summary": {
+          "en": "Technical program (EQF Level 5) in offensive and defensive security. Completed September 2026.",
+          "it": "Percorso tecnico (livello EQF 5) in sicurezza offensiva e difensiva. Concluso a settembre 2026."
+        },
+        "overviewSummary": {
+          "en": "EQF Level 5, completed September 2026.",
+          "it": "Livello EQF 5, concluso a settembre 2026."
+        },
+        "tags": [
+          "cybersecurity",
+          "EQF 5"
+        ]
+      },
+      {
+        "id": "liceo",
+        "period": {
+          "en": "2019 – 2024",
+          "it": "2019 – 2024"
+        },
+        "title": {
+          "en": "Scientific High School Diploma",
+          "it": "Diploma di Liceo Scientifico"
+        },
+        "org": "I.I.S. Primo Levi",
+        "location": {
+          "en": "Vignola, Italy",
+          "it": "Vignola, Italia"
+        },
+        "summary": {
+          "en": "Liceo Scientifico, Applied Sciences track (EQF Level 4).",
+          "it": "Liceo Scientifico, opzione Scienze Applicate (livello EQF 4)."
+        },
+        "tags": [
+          "applied sciences",
+          "computer science"
+        ]
+      }
+    ],
+    "certificationsIntro": {
+      "en": "Courses completed with Cisco Networking Academy. Each badge is verifiable on Credly.",
+      "it": "Corsi completati con Cisco Networking Academy. Ogni badge è verificabile su Credly."
+    },
+    "certifications": [
+      {
+        "id": "cisco-network-technician",
+        "kind": {
+          "en": "Career path",
+          "it": "Career path"
+        },
+        "date": {
+          "en": "Mar 2026",
+          "it": "Mar 2026"
+        },
+        "title": "Network Technician Career Path",
+        "issuer": "Cisco Networking Academy",
+        "summary": {
+          "en": "Career path completed with final exam: network fundamentals, device configuration, IP addressing, troubleshooting and network security.",
+          "it": "Career path completato con esame finale: fondamenti di rete, configurazione dei dispositivi, indirizzamento IP, troubleshooting e sicurezza di rete."
+        },
+        "overviewSummary": {
+          "en": "Network fundamentals, configuration, IP addressing and troubleshooting.",
+          "it": "Fondamenti di rete, configurazione, indirizzamento IP e troubleshooting."
+        },
+        "tags": [
+          "networking",
+          "troubleshooting",
+          "Cisco"
+        ],
+        "verifyUrl": "https://www.credly.com/badges/5632f5fd-b558-473b-ae09-1b0ab5252aab/public_url"
+      },
+      {
+        "id": "cisco-intro-cybersecurity",
+        "date": {
+          "en": "Jan 2026",
+          "it": "Gen 2026"
+        },
+        "title": "Introduction to Cybersecurity",
+        "issuer": "Cisco Networking Academy",
+        "summary": {
+          "en": "Threats, attacks, network defense and security fundamentals.",
+          "it": "Minacce, attacchi, difesa della rete e fondamenti di sicurezza."
+        },
+        "tags": [
+          "cybersecurity",
+          "Cisco"
+        ],
+        "verifyUrl": "https://www.credly.com/badges/4367de49-0612-4c42-934c-0ccb888b5b8c/public_url"
+      },
+      {
+        "id": "cisco-industrial-networking",
+        "date": {
+          "en": "Mar 2026",
+          "it": "Mar 2026"
+        },
+        "title": "Industrial Networking Essentials",
+        "issuer": "Cisco Networking Academy",
+        "summary": {
+          "en": "Industrial networks, industrial protocols, Ethernet/VLANs, IT/OT convergence.",
+          "it": "Reti industriali, protocolli industriali, Ethernet/VLAN, convergenza IT/OT."
+        },
+        "tags": [
+          "OT",
+          "industrial networking",
+          "Cisco"
+        ],
+        "verifyUrl": "https://www.credly.com/badges/d828df1d-fb9c-4d48-b250-b96001765116/public_url"
+      },
+      {
+        "id": "cisco-modern-ai",
+        "date": {
+          "en": "Jan 2026",
+          "it": "Gen 2026"
+        },
+        "title": "Introduction to Modern AI",
+        "issuer": "Cisco Networking Academy",
+        "summary": null,
+        "tags": [
+          "AI",
+          "Cisco"
+        ],
+        "verifyUrl": "https://www.credly.com/badges/9249fb44-bd88-4154-a36b-d6c1f6e47b37/public_url"
+      }
+    ],
+    "verifyLabel": {
+      "en": "Verify on Credly",
+      "it": "Verifica su Credly"
+    },
+    "awards": [
+      {
+        "id": "the-doers",
+        "date": {
+          "en": "2023",
+          "it": "2023"
+        },
+        "title": {
+          "en": "“From Idea to Action” — Winner",
+          "it": "“From Idea to Action” — Vincitore"
+        },
+        "org": "The Doers",
+        "location": {
+          "en": "Vignola, Italy",
+          "it": "Vignola, Italia"
+        },
+        "summary": {
+          "en": "Won an entrepreneurial development program turning ideas into ventures.",
+          "it": "Vincitore di un programma di sviluppo imprenditoriale per trasformare idee in progetti d'impresa."
+        },
+        "overviewSummary": {
+          "en": "Entrepreneurial development program.",
+          "it": "Programma di sviluppo imprenditoriale."
+        },
+        "tags": [
+          "entrepreneurship",
+          "pitching"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": {
+      "en": "04 / projects",
+      "it": "04 / progetti"
+    },
+    "title": {
+      "en": "Selected work",
+      "it": "Lavori selezionati"
+    },
+    "items": [
+      {
+        "id": "portfolio",
+        "visibility": "public",
+        "badge": {
+          "en": "GitHub · public",
+          "it": "GitHub · pubblico"
+        },
+        "title": {
+          "en": "Personal Portfolio",
+          "it": "Portfolio personale"
+        },
+        "summary": {
+          "en": "A hand-built portfolio site with a dark glow / glassmorphism theme — typing effects, scroll reveals, and project filters. No build tools, pure vanilla.",
+          "it": "Un sito portfolio realizzato a mano con tema scuro glow / glassmorphism: effetti di scrittura, animazioni allo scroll e filtri dei progetti. Nessuno strumento di build, solo JavaScript vanilla."
+        },
+        "tags": [
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ],
+        "url": "https://github.com/abus1dd/abus1dd.github.io",
+        "note": "Description refers to the old site; update it once the Desk redesign ships."
+      },
+      {
+        "id": "ai-issue-resolution",
+        "visibility": "private",
+        "badge": {
+          "en": "GitLab · private · in production",
+          "it": "GitLab · privato · in produzione"
+        },
+        "title": {
+          "en": "AI Issue-Resolution Workflow",
+          "it": "Workflow AI per la risoluzione delle issue"
+        },
+        "summary": {
+          "en": "An AI agent that resolves code issues on GitLab/GitHub automatically. It clones the project into an isolated Docker sandbox, edits the code, runs the tests to verify the fix, then opens a Merge Request for human review.",
+          "it": "Un agente AI che risolve automaticamente le issue del codice su GitLab/GitHub. Clona il progetto in una sandbox Docker isolata, modifica il codice, esegue i test per verificare la correzione e apre una Merge Request per la revisione umana."
+        },
+        "tags": [
+          "AI agents",
+          "Docker",
+          "automation"
+        ],
+        "url": null,
+        "privateNote": {
+          "en": "Code is private; details available on request.",
+          "it": "Il codice è privato; dettagli disponibili su richiesta."
+        },
+        "video": null,
+        "note": "This is the gitlab_ai_workflow project. Add Abu's conceptual animation video here (Phase 3). No code, internal URLs or company data."
+      }
+    ]
+  },
+  "languages": {
+    "eyebrow": {
+      "en": "05 / languages",
+      "it": "05 / lingue"
+    },
+    "title": {
+      "en": "Languages",
+      "it": "Lingue"
+    },
+    "items": [
+      {
+        "name": {
+          "en": "Bengali",
+          "it": "Bengalese"
+        },
+        "level": {
+          "en": "native",
+          "it": "madrelingua"
+        }
+      },
+      {
+        "name": {
+          "en": "English",
+          "it": "Inglese"
+        },
+        "level": {
+          "en": "C1 · B2 speaking",
+          "it": "C1 · B2 parlato"
+        }
+      },
+      {
+        "name": {
+          "en": "Italian",
+          "it": "Italiano"
+        },
+        "level": {
+          "en": "B2 · intermediate",
+          "it": "B2 · intermedio"
+        }
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": {
+      "en": "06 / contact",
+      "it": "06 / contatti"
+    },
+    "title": {
+      "en": "Let's build something together",
+      "it": "Costruiamo qualcosa insieme"
+    },
+    "text": {
+      "en": "Hiring for a junior cybersecurity or AI role? My inbox is open.",
+      "it": "Cerchi un profilo junior in cybersecurity o AI? Scrivimi pure."
+    },
+    "links": [
+      {
+        "id": "email",
+        "label": {
+          "en": "Email me",
+          "it": "Scrivimi"
+        },
+        "url": "mailto:abubakarso2004@gmail.com"
+      },
+      {
+        "id": "linkedin",
+        "label": {
+          "en": "LinkedIn",
+          "it": "LinkedIn"
+        },
+        "url": "https://www.linkedin.com/in/abu-bakar-siddiq-/"
+      },
+      {
+        "id": "github",
+        "label": {
+          "en": "GitHub",
+          "it": "GitHub"
+        },
+        "url": "https://github.com/abus1dd"
+      },
+      {
+        "id": "cv",
+        "label": {
+          "en": "Résumé",
+          "it": "Curriculum"
+        },
+        "url": "assets/Abu-Bakar-Siddiq-CV.pdf"
+      }
+    ]
+  },
+  "funFact": {
+    "en": null,
+    "it": null,
+    "note": "For the mug. Abu to supply one short human detail."
+  },
+  "footer": {
+    "copyright": {
+      "en": "© 2026 Abu Bakar Siddiq",
+      "it": "© 2026 Abu Bakar Siddiq"
+    }
+  },
+  "assets": {
+    "cvEn": "assets/Abu-Bakar-Siddiq-CV.pdf",
+    "cvIt": null,
+    "cvNote": "Only one CV PDF exists today. An Italian CV PDF is still needed."
+  }
+}
