@@ -602,7 +602,8 @@
         "video": null,
         "note": "This is the gitlab_ai_workflow project. Add Abu's conceptual animation video here (Phase 3). No code, internal URLs or company data."
       }
-    ]
+    ],
+    "decision": "Decision 2026-10-26: show only these two projects."
   },
   "languages": {
     "eyebrow": {
@@ -708,6 +709,6 @@
   "assets": {
     "cvEn": "assets/Abu-Bakar-Siddiq-CV.pdf",
     "cvIt": null,
-    "cvNote": "Only one CV PDF exists today. An Italian CV PDF is still needed."
+    "cvNote": "Decision 2026-10-26: one CV PDF for both languages for now. An Italian CV may be added later."
   }
 }

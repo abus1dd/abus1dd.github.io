@@ -16,7 +16,8 @@ Read this first in any new session. It records what is decided, what is done and
 | Stack | Plain HTML/CSS/JS, GSAP + ScrollTrigger, Lenis, optional Three.js; Vite optional |
 | Visual design | Abu designs it in Claude Design and brings it back |
 | AI assistant | Scripted first, then Cloudflare Worker + Workers AI free tier with daily caps |
-| Private project | `gitlab_ai_workflow` (shown as "AI Issue-Resolution Workflow"): description + video only, no code or internal details |
+| Projects | Only two: Personal Portfolio and AI Issue-Resolution Workflow (`gitlab_ai_workflow`, private: description + video only, no code or internal details) |
+| CV | One PDF for both languages for now |
 
 ### Desk object map
 
@@ -48,6 +49,7 @@ Read this first in any new session. It records what is decided, what is done and
 ## Done
 
 - 2026-10-25: created branch `redesign/animated-portfolio` from `main` (72b0581).
+- 2026-10-26: confirmed with Abu: two projects only, one CV for now, video later.
 - 2026-10-26: extracted every visible and tabbed string from the old `index.html` into `content/content.json` (EN verbatim, IT first translation). Checked line by line against the original.
 
 ## Notes about the old site
@@ -58,11 +60,9 @@ Read this first in any new session. It records what is decided, what is done and
 ## Open items for Abu
 
 - [ ] Proofread the Italian text in `content/content.json`.
-- [ ] Supply the conceptual animation video for the private project.
+- [ ] Supply the conceptual animation video for the private project (Abu will send it later).
 - [ ] Supply one short fun fact for the mug.
-- [ ] Provide an Italian CV PDF (only the English-language file exists).
 - [ ] Bring back the Claude Design output.
-- [ ] Confirm nothing in the project descriptions must stay private.
 
 ## Next steps
 
