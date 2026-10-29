@@ -2,70 +2,48 @@
 
 Read this first in any new session. It records what is decided, what is done and what comes next.
 
-- **Branch:** `redesign/animated-portfolio` (work here). `main` is the live site and stays untouched until a reviewed pull request.
-- **Full plan:** the Claude Doc "Portfolio redesign: piano completo".
-- **Last updated:** 2026-10-26
+- **Branch:** `redesign/animated-portfolio` (work here). `main` is the live site; changes reach it through a reviewed pull request.
+- **Last updated:** 2026-10-29
 
-## Decisions
+## Status: live
 
-| Item | Decision |
-|---|---|
-| Concept | **The Desk**: interactive top-down desk; each object is a section |
-| Tone | Professional writing. Personality comes from motion and interaction |
-| Languages | English + Italian, from `content/content.json` |
-| Stack | Plain HTML/CSS/JS, GSAP + ScrollTrigger, Lenis, optional Three.js; Vite optional |
-| Visual design | Abu designs it in Claude Design and brings it back |
-| AI assistant | Scripted first, then Cloudflare Worker + Workers AI free tier with daily caps |
-| Projects | Only two: Personal Portfolio and AI Issue-Resolution Workflow (`gitlab_ai_workflow`, private: description + video only, no code or internal details) |
-| CV | One PDF for both languages for now |
+The Desk redesign was merged into `main` on 2026-10-29 and is the live site at https://abus1dd.github.io/.
 
-### Desk object map
+## What the site is
 
-| Object | Section |
-|---|---|
-| Notebook | About |
-| Laptop | Projects |
-| Phone | Contact |
-| Mug | Fun fact |
-| Folder | CV (EN + IT) |
-| Lamp | Day/night theme |
-| Radio | EN/IT switch |
-| Desk companion | AI assistant |
-| Scroll extras (plant, calendar, keyboard) | Skills, journey, "currently looking for" |
+A single self-contained `index.html` (HTML, CSS, SVG, GSAP 3.12.5 + ScrollTrigger from cdnjs). All text, English and Italian, lives inside the page's script; `content/content.json` is the old site's text, kept only as a reference.
 
-## Status
+| Object | Section | Interaction |
+|---|---|---|
+| Notebook | About | Cover and pages flip open |
+| Laptop | Projects | Working terminal (help, whoami, projects, open 1/2, skills, status, contact…) and a ~/projects tab with both projects |
+| Phone | Contact | Lifts, unlocks, three apps (Email, LinkedIn, GitHub) open in new tabs |
+| Mug | Fun fact | A different fact each click (8 facts, shuffled, never twice in a row) |
+| CV folder | CV | Flap opens, page rises; downloads `assets/Abu-Bakar-Siddiq-CV.pdf` |
+| Lamp | Day / night | Head nods, theme switches |
+| Radio | EN / IT | Knob spins, static, language switches |
+| Desk companion | AI assistant | Scripted answers on GitHub Pages; live answers only inside the Claude preview |
+| Plant (scroll) | Skills | Skill tags pop out |
+| Calendar (scroll) | Journey | Month pages flip, timeline lights up |
+| Keyboard (scroll) | Certifications | Key wave, dragon hologram, four Cisco badges with Credly links |
+| Sticky note (wall) | Currently looking for | Pin pops, note flutters |
 
-| Phase | Status |
-|---|---|
-| 0. Foundations | **In progress**: content extracted; tokens and EN/IT switch next |
-| 1. Motion engine | Not started |
-| Pause: design in Claude Design | Waiting on Abu |
-| 2. Build the Desk | Blocked on design |
-| 3. Private project card + video | Blocked on video file |
-| 4. AI assistant | Not started |
-| 5. Content safety and polish | Not started |
-| 6. Quality gates and launch (PR to `main`) | Not started |
+Mobile shows the objects as a stacked list; reduced-motion users get fades instead of zooms; a plain-text version of every section sits below the desk; a `<noscript>` block covers browsers without JavaScript.
 
-## Done
+## Assets
 
-- 2026-10-25: created branch `redesign/animated-portfolio` from `main` (72b0581).
-- 2026-10-26: confirmed with Abu: two projects only, one CV for now, video later.
-- 2026-10-26: extracted every visible and tabbed string from the old `index.html` into `content/content.json` (EN verbatim, IT first translation). Checked line by line against the original.
+`assets/Abu-Bakar-Siddiq-CV.pdf`, `assets/ai-issue-resolution-workflow.mp4` + `-poster.jpg`, `assets/portfolio-desk.webp` (projects thumbnail), `assets/og-image.png` (link preview), `favicon.svg`.
 
-## Notes about the old site
+## Contact links
 
-- `index.html` is a bundled export (content lives in a JSON-escaped template inside a `<script type="__bundler/template">`). It is kept unchanged on this branch as a reference until the new site replaces it.
-- Assets: `assets/Abu-Bakar-Siddiq-CV.pdf`, `assets/og-image.png`, `favicon.svg`.
+Defined once in the `LINKS` object near the top of the script in `index.html`.
 
-## Open items for Abu
+## Analytics
 
-- [ ] Proofread the Italian text in `content/content.json`.
-- [ ] Supply the conceptual animation video for the private project (Abu will send it later).
-- [ ] Supply one short fun fact for the mug.
-- [ ] Bring back the Claude Design output.
+GoatCounter script points at `https://abus1dd.goatcounter.com/count`. It counts nothing until the `abus1dd` code is registered on goatcounter.com.
 
-## Next steps
+## Open items
 
-1. Design tokens in CSS variables (placeholder values until the design arrives).
-2. EN/IT switch reading `content/content.json` (remember choice, default from browser language).
-3. Phase 1 motion engine: Lenis, GSAP/ScrollTrigger, reveal/zoom helpers, reduced-motion support.
+- [ ] Register `abus1dd` on GoatCounter (or change the code in `index.html`).
+- [ ] Check the LinkedIn preview with linkedin.com/post-inspector.
+- [ ] Later: live AI assistant via a small backend (e.g. a Cloudflare Worker with daily caps).
