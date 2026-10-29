@@ -38,7 +38,7 @@
   --pool:rgba(255,186,84,.26); --spool:rgba(0,229,255,.18); --mpool:rgba(255,61,203,.14); --refl:rgba(255,61,203,.2);
   --halo:26px; --keyglow:rgba(0,229,255,.5); --scrglow:0 0 60px rgba(0,229,255,.35),0 0 140px rgba(0,229,255,.16);
   --steam:rgba(200,235,255,.65); --shadow:rgba(0,0,0,.78);
-  --glass:rgba(7,12,28,.86); --chip:rgba(5,9,20,.82); --card:#0B1330; --card2:#101A3D;
+  --glass:rgba(7,12,28,.95); --chip:rgba(5,9,20,.82); --card:#0B1330; --card2:#101A3D;
   --lblbg:#00E5FF; --lblfg:#02050D; --paper:#DDEBF7; --ink:#0B1124; --note:#C8FF3B;
   --f-disp:'Unbounded','Arial Black',system-ui,sans-serif;
   --f-neon:'Tilt Neon','Trebuchet MS',system-ui,sans-serif;
@@ -71,7 +71,7 @@ button{font:inherit;color:inherit}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Header */
-.top{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;align-items:center;gap:18px;flex-wrap:wrap;min-height:64px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;align-items:center;gap:18px;flex-wrap:wrap;min-height:64px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:color-mix(in srgb,var(--bg) 93%,transparent);border-bottom:1px solid var(--line)}
 .skip{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1.5px solid var(--line);border-radius:999px;font:500 14px/1 var(--f-body);text-decoration:none;white-space:nowrap}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .mono{width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:var(--lblbg);color:var(--lblfg);font:700 11px/1 var(--f-disp);box-shadow:0 0 18px color-mix(in srgb,var(--lblbg) 45%,transparent)}
@@ -102,6 +102,7 @@ button{font:inherit;color:inherit}
 .wnote .notep em{font-size:13px}
 .pin{position:absolute;left:50%;top:-5px;width:17px;height:17px;margin-left:-8.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FF9BE6,#FF3DCB 55%,#9C1478);box-shadow:0 4px 6px rgba(0,0,0,.45),0 0 14px rgba(255,61,203,.6)}
 .wnote:focus-visible .notep{outline:4px solid var(--cyan);outline-offset:8px}
+.moving .plane,.moving .wall{will-change:transform}
 .plane{position:absolute;left:0;top:0;width:1700px;height:1900px;transform-origin:0 0;transform-style:preserve-3d;--bbx:-55deg}
 .surface{position:absolute;left:0;top:0;width:1700px;height:1900px;
   background-color:var(--desk);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),repeating-linear-gradient(90deg,transparent 0 168px,var(--plank) 168px 170px);background-size:60px 60px,60px 60px,auto;box-shadow:0 0 0 2px var(--rim),0 0 50px var(--rimglow)}
@@ -116,12 +117,13 @@ button{font:inherit;color:inherit}
 .sign2{font:400 28px/1 var(--f-neon);color:var(--tube2);text-shadow:var(--signB);white-space:nowrap}
 .win{position:absolute;left:1720px;top:400px;width:400px;height:280px;box-sizing:border-box;border:10px solid var(--frame);border-radius:8px;overflow:hidden;box-shadow:0 0 0 1px color-mix(in srgb,var(--cyan) 18%,transparent)}
 .win svg{display:block;width:100%;height:100%}
-.rain{position:absolute;inset:0;opacity:var(--rainO);background:repeating-linear-gradient(105deg,transparent 0 9px,rgba(170,210,255,.3) 9px 10px);background-size:46px 46px;animation:rain .5s linear infinite}
+.rain{position:absolute;left:0;right:0;top:-46px;bottom:0;opacity:var(--rainO);background:repeating-linear-gradient(105deg,transparent 0 9px,rgba(170,210,255,.3) 9px 10px);background-size:46px 46px;will-change:transform;animation:rain .6s linear infinite}
 .mull{position:absolute;background:var(--frame)}
 .pool{position:absolute;display:block;border-radius:50%;pointer-events:none;transform:translateZ(.2px)}
 .day .pool.lampPool{display:none}
 .trc{position:absolute;left:0;top:0;pointer-events:none;transform:translateZ(.4px)}
-.flow{stroke-dasharray:8 22;animation:flow 1.8s linear infinite}
+.flow{stroke-dasharray:8 22}
+.trc{will-change:opacity;animation:breathe 3.6s ease-in-out infinite}
 .day .flow{display:none}
 
 /* 3D objects */
@@ -316,7 +318,7 @@ button{font:inherit;color:inherit}
 .skipIntro{position:absolute;left:max(24px,env(safe-area-inset-left,0px));bottom:max(26px,env(safe-area-inset-bottom,0px));min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--chip);font:500 13px/1 var(--f-body);cursor:pointer}
 
 /* Panel */
-.panel{position:fixed;z-index:45;top:calc(80px + env(safe-area-inset-top,0px));right:max(24px,env(safe-area-inset-right,0px));bottom:max(24px,env(safe-area-inset-bottom,0px));width:min(460px,42vw);box-sizing:border-box;overflow:auto;overscroll-behavior:contain;padding:26px 28px 30px;background:var(--glass);border:1px solid var(--line);border-radius:22px;box-shadow:0 0 50px color-mix(in srgb,var(--cyan) 18%,transparent),0 30px 70px rgba(0,0,0,.45);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.panel{position:fixed;z-index:45;top:calc(80px + env(safe-area-inset-top,0px));right:max(24px,env(safe-area-inset-right,0px));bottom:max(24px,env(safe-area-inset-bottom,0px));width:min(460px,42vw);box-sizing:border-box;overflow:auto;overscroll-behavior:contain;padding:26px 28px 30px;background:var(--glass);border:1px solid var(--line);border-radius:22px;box-shadow:0 0 50px color-mix(in srgb,var(--cyan) 18%,transparent),0 30px 70px rgba(0,0,0,.45);}
 .pBack{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;cursor:pointer;font:500 14px/1 var(--f-body)}
 .pKick{margin:22px 0 0;font:500 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
 .panel h2{margin:10px 0 16px;font:700 26px/1.2 var(--f-disp);text-wrap:balance;outline:none}
@@ -430,11 +432,11 @@ button{font:inherit;color:inherit}
 }
 @media (max-width:760px){ .top{gap:10px;padding-block:8px} .skip{min-height:36px} }
 
-@keyframes rain{to{background-position:-14px 46px}}
-@keyframes flow{to{stroke-dashoffset:-60}}
+@keyframes rain{to{transform:translateY(46px)}}
+@keyframes breathe{50%{opacity:.6}}
 @keyframes blink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){
-  .rain,.flow,.cur,.pulse::after{animation:none}
+  .rain,.trc,.cur,.pulse::after{animation:none}
 }
 </style>
 <script data-goatcounter="https://abus1dd.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
@@ -1241,7 +1243,12 @@ objs.slice().sort((a, b) => a.order - b.order).forEach((o, i) => { o.idx = o.key
 const decor = $$('.obj[data-decor]').map((el) => ({ el, dropEl: $('.drop', el), gs: $('.gs', el), order: +el.dataset.order }));
 
 let fitS = 1, coVisible = true, coDirty = 60;
+let coHidden = false;
 function placeCallouts() {
+  if (!coVisible) {
+    if (!coHidden) { objs.forEach((o) => { o.g.classList.add('hid'); o.label.classList.add('hid'); }); coHidden = true; }
+    if (!$('#bub').classList.contains('show')) return;
+  } else coHidden = false;
   const fr = fit.getBoundingClientRect();
   const sr = stick.getBoundingClientRect();
   const ha = $('#botHeadAnc'); if (ha) { const r = ha.getBoundingClientRect(); const b = $('#bub'); b.style.left = ((r.left - fr.left) / fitS).toFixed(1) + 'px'; b.style.top = ((r.top - fr.top) / fitS).toFixed(1) + 'px'; }
@@ -1273,6 +1280,12 @@ function placeCallouts() {
 const cam = { fx: 850, fy: 550, fz: 0, wx: 720, wy: 640, wz: 0, tilt: 55 };
 let pan = 0, zoomed = false, camTween = null;
 function baseCam() { return { fx: 850, fy: 550 + pan, fz: 0, wx: 720, wy: 640, wz: 0, tilt: 55 }; }
+let movT = 0;
+function markMoving() {
+  if (introTl && introTl.isActive()) return;
+  if (!root.classList.contains('moving')) root.classList.add('moving');
+  clearTimeout(movT); movT = setTimeout(() => root.classList.remove('moving'), 220);
+}
 function applyCam() {
   const tf = `translate3d(${cam.wx}px,${cam.wy}px,${cam.wz}px) rotateX(${cam.tilt}deg) translate3d(${-cam.fx}px,${-cam.fy}px,${-cam.fz}px)`;
   plane.style.transform = tf;
@@ -1282,6 +1295,7 @@ function applyCam() {
   const sx = 720 + (Xw - 720) * k, sy = 180 + (Yw - 180) * k;
   wallEl.style.transform = `translate(${(sx - 1200).toFixed(1)}px, ${(sy - 700).toFixed(1)}px) scale(${(k * 0.92).toFixed(4)})`;
   plane.style.setProperty('--bbx', (-cam.tilt).toFixed(2) + 'deg');
+  markMoving();
   coDirty = Math.max(coDirty, 2);
 }
 function fitStage() {
@@ -1303,7 +1317,7 @@ function hoverOn(o) {
     gsap.fromTo('#lens', { scale: 1 }, { scale: 1.22, transformOrigin: '50% 50%', duration: .14, yoyo: true, repeat: 3, ease: 'power1.inOut' });
   }
   if (!reduced) gsap.to(o.liftEl, { z: o.lift, duration: .55, ease: 'power3.out', overwrite: 'auto', onUpdate: () => { coDirty = 2; } });
-  gsap.to(o.gs, { opacity: 1, scale: 1.14, x: reduced ? 0 : 10, y: reduced ? 0 : 14, filter: 'blur(22px)', duration: .55, ease: 'power3.out', overwrite: 'auto' });
+  gsap.to(o.gs, { opacity: 1, x: reduced ? 0 : 10, y: reduced ? 0 : 14, duration: .55, ease: 'power3.out', overwrite: 'auto' });
 }
 function hoverOff(o) {
   o.el.classList.remove('on'); o.g.classList.remove('on'); o.label.classList.remove('on');
@@ -1311,7 +1325,7 @@ function hoverOff(o) {
   if (!hasGsap) return;
   const q = tilt.get(o); if (q) { q.rx(0); q.ry(0); }
   gsap.to(o.liftEl, { z: 0, duration: .9, ease: 'elastic.out(1, 0.7)', overwrite: 'auto', onUpdate: () => { coDirty = 2; } });
-  gsap.to(o.gs, { opacity: .8, scale: 1, x: 0, y: 0, filter: 'blur(14px)', duration: .6, ease: 'power2.out', overwrite: 'auto' });
+  gsap.to(o.gs, { opacity: .8, x: 0, y: 0, duration: .6, ease: 'power2.out', overwrite: 'auto' });
 }
 function bindObj(o) {
   if (hasGsap && o.wall) gsap.set(o.liftEl, { transformPerspective: 700 });
@@ -1831,7 +1845,7 @@ function dropIn(o, delay) {
   tl.fromTo(o.dropEl, { z: 240, scale: .94 }, { z: 0, scale: 1, duration: .5, ease: 'power2.in' })
     .to(o.dropEl, { z: 7, duration: .12, ease: 'power1.out' })
     .to(o.dropEl, { z: 0, duration: .16, ease: 'power1.in' })
-    .fromTo(o.gs, { opacity: 0, scale: 1.9 }, { opacity: .8, scale: 1, duration: .5, ease: 'power2.in' }, 0);
+    .fromTo(o.gs, { opacity: 0 }, { opacity: .8, duration: .5, ease: 'power2.in' }, 0);
   return tl;
 }
 function onPan() {
@@ -2005,7 +2019,6 @@ function startIdle() {
   gsap.delayedCall(2.5, greet);
   const wl = $('#wnoteLift'); if (wl) { const sway = () => { if (!(hovered && hovered.wall)) gsap.timeline().to(wl, { rotation: 1.6, duration: .9, ease: 'sine.inOut' }).to(wl, { rotation: -1, duration: 1.1, ease: 'sine.inOut' }).to(wl, { rotation: 0, duration: .8, ease: 'sine.inOut' }); gsap.delayedCall(gsap.utils.random(5, 9), sway); }; gsap.delayedCall(3, sway); }
   gsap.timeline({ repeat: -1, repeatDelay: 3.2 }).to('.eye', { scaleY: .1, transformOrigin: '50% 50%', duration: .07, ease: 'power1.in' }).to('.eye', { scaleY: 1, duration: .12, ease: 'power1.out' });
-  gsap.to(['#lampPool', '#beam'], { opacity: .78, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
   gsap.to('#leaves', { rotation: 2.2, svgOrigin: '150 250', duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
   gsap.to('#cueArrow', { y: 3, duration: .8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
   flickerLoop();
@@ -2025,7 +2038,7 @@ function intro() {
   const drops = front.map((o) => o.el).concat(decor.map((d) => d.el));
   gsap.set(drops, { visibility: 'hidden' });
   gsap.set(front.map((o) => o.dropEl).concat(decor.map((d) => d.dropEl)), { z: 240, scale: .94 });
-  gsap.set(front.map((o) => o.gs).concat(decor.map((d) => d.gs)), { opacity: 0, scale: 1.9 });
+  gsap.set(front.map((o) => o.gs).concat(decor.map((d) => d.gs)), { opacity: 0 });
   gsap.set('#scr', { z: 12, rotationX: -180, transformOrigin: '50% 100%' });
   gsap.set('#disp', { opacity: 0 });
   gsap.set(['#beam', '#bulb', '#lampPool'], { opacity: 0 });
@@ -2046,7 +2059,7 @@ function intro() {
       .to(o.dropEl, { z: 0, scale: 1, duration: .5, ease: 'power2.in' }, s)
       .to(o.dropEl, { z: 7, duration: .12, ease: 'power1.out' }, s + .5)
       .to(o.dropEl, { z: 0, duration: .16, ease: 'power1.in' }, s + .62)
-      .to(o.gs, { opacity: .8, scale: 1, duration: .5, ease: 'power2.in' }, s);
+      .to(o.gs, { opacity: .8, duration: .5, ease: 'power2.in' }, s);
     if (o.key === 'projects') {
       tl.to('#scr', { rotationX: -76, duration: 1.1, ease: 'power3.out' }, s + .85)
         .to('#disp', { opacity: 1, duration: .06 }, s + 1.35).to('#disp', { opacity: .4, duration: .05 }, s + 1.43).to('#disp', { opacity: 1, duration: .3 }, s + 1.5);
@@ -2062,7 +2075,7 @@ function intro() {
       tl.fromTo('.eye', { scaleY: 0, transformOrigin: '50% 50%' }, { scaleY: 1, duration: .3, ease: 'back.out(3)' }, s + 1.0);
     }
   });
-  decor.forEach((d) => { tl.set(d.el, { visibility: 'visible' }, at + .9).to(d.dropEl, { z: 0, scale: 1, duration: .5, ease: 'power2.in' }, at + .9).to(d.gs, { opacity: .8, scale: 1, duration: .5, ease: 'power2.in' }, at + .9); });
+  decor.forEach((d) => { tl.set(d.el, { visibility: 'visible' }, at + .9).to(d.dropEl, { z: 0, scale: 1, duration: .5, ease: 'power2.in' }, at + .9).to(d.gs, { opacity: .8, duration: .5, ease: 'power2.in' }, at + .9); });
   if (wn) tl.to(wn.liftEl, { opacity: 1, scale: 1, rotation: 0, duration: .55, ease: 'back.out(2.4)' }, at + front.length * .11 + .6)
     .fromTo(wn.el.querySelector('.pin'), { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: .3, ease: 'power3.in' }, at + front.length * .11 + 1.0)
     .to(wn.liftEl, { rotation: 2.5, duration: .1, yoyo: true, repeat: 3, ease: 'sine.inOut' }, at + front.length * .11 + 1.3);
