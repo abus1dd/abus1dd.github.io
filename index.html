@@ -406,6 +406,18 @@ button{font:inherit;color:inherit}
 .mrow .mcard{min-height:72px;justify-content:center}
 .msep{margin:22px 0 12px;font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
+/* Light mode on wide screens */
+.lite .desk{display:none}
+.lite .stack{display:block}
+@media (min-width:761px) and (min-aspect-ratio:4/5){
+  .lite .stack{padding-top:110px}
+  .lite .stack>*{max-width:980px;margin-left:auto;margin-right:auto}
+  .lite .mlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lite .mlist>li.msep,.lite .mlist>li.mrow,.lite .mlist>li.mlite,.lite .mlist>li:nth-child(2){grid-column:1/-1}
+}
+.lite .phoneUI{left:0;right:0;width:auto;top:0;bottom:0;padding-top:64px;background:color-mix(in srgb,var(--bg) 82%,transparent);pointer-events:auto}
+.mlite{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding:14px 16px;border-radius:16px;border:1px dashed var(--line);background:var(--card)}
+.mlite p{flex:1 1 320px;margin:0;font-size:14px;line-height:1.45;color:var(--muted)}
 /* Plain content */
 .plain{border-top:1px solid var(--line);padding-block:72px 96px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--bg)}
 .wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:72px}
@@ -1046,6 +1058,34 @@ const CERTS = [
 ];
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobileMQ = window.matchMedia('(max-width: 760px), (max-aspect-ratio: 4/5)');
+/* Light mode: browsers drawing without a graphics card get the card layout instead of the 3D desk. */
+let LITE = false, liteWhy = '';
+(() => {
+  let pref = null;
+  try { const q = new URLSearchParams(location.search).get('desk'); if (q === 'full' || q === 'lite') { pref = q; localStorage.setItem('desk-mode', q); } else pref = localStorage.getItem('desk-mode'); } catch (e) {}
+  if (pref === 'full') return;
+  if (pref === 'lite') { LITE = true; liteWhy = 'choice'; return; }
+  try {
+    const c = document.createElement('canvas'), g = c.getContext('webgl') || c.getContext('experimental-webgl');
+    if (!g) { LITE = true; liteWhy = 'gpu'; return; }
+    const ext = g.getExtension('WEBGL_debug_renderer_info');
+    const r = ext ? String(g.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : '';
+    if (/swiftshader|basic render|llvmpipe|softpipe|software/i.test(r)) { LITE = true; liteWhy = 'gpu'; }
+    const lose = g.getExtension('WEBGL_lose_context'); if (lose) lose.loseContext();
+  } catch (e) {}
+})();
+if (LITE) document.documentElement.classList.add('lite');
+const isStack = () => mobileMQ.matches || LITE;
+let FORCED_FULL = false; try { FORCED_FULL = localStorage.getItem('desk-mode') === 'full'; } catch (e) {}
+function goLite(why) {
+  if (LITE) return;
+  LITE = true; liteWhy = why; root.classList.add('lite');
+  if (introTl) introTl.progress(1);
+  if (openKey) closePanel();
+  setLoops(false);
+  applyText(); scrollTo(0, 0);
+}
+function setDeskMode(m) { try { localStorage.setItem('desk-mode', m); } catch (e) {} location.reload(); }
 const PANMAX = 720;
 
 /* ---------- Copy ---------- */
@@ -1079,7 +1119,7 @@ en: {
   contactTitle:'Contact', contact1:'Email is the quickest way to reach me. Write in English or Italian.',
   cEmail:'Email', cLinked:'LinkedIn', cGit:'GitHub', vEmail:'abubakarso2004@gmail.com', vLinked:'linkedin.com/in/abu-bakar-siddiq-', vGit:'github.com/abus1dd', open:'Open', copy:'Copy', copied:'Copied', copyFail:'Select and copy',
   cvTitle:'Curriculum vitae', cv1:'One PDF with education, internships, projects and certifications.', cvBtn:'Download CV (PDF)', cvNote:'PDF · English',
-  phSub:'Tap an app. It opens in a new tab.', phUnlock:'Unlocking', funTitle:'Fun fact', factN:'Fact', nextFact:'Another fun fact', nbL1:'Cybersecurity · AI agents', cs1:'2025', cs2:'2026', cs3:'2026',
+  phSub:'Tap an app. It opens in a new tab.', liteNote:'Light version: your browser is drawing this page without its graphics card, so the 3D desk is switched off to keep things smooth.', liteChoice:'Light version, as you chose.', liteBtn:'Show the 3D desk anyway', liteBack:'Light version', phUnlock:'Unlocking', funTitle:'Fun fact', factN:'Fact', nextFact:'Another fun fact', nbL1:'Cybersecurity · AI agents', cs1:'2025', cs2:'2026', cs3:'2026',
   facts:['I grew up speaking Bengali, and now I work in Italian and English.','In 2023 I won “From Idea to Action”, a challenge run by The Doers.','During my internship I investigated an AI coding agent that had lost data, by tracing back through its own logs.','My Erasmus+ in Málaga was the first time I worked in English every day, in a multicultural team.','I play Apex Legends. Ask me who my main is.','I built an AI that fixes bugs on its own, but it always asks a human before merging.','I speak three languages and debug in a fourth: Python.','During my internship I helped set up Vaultwarden, a self-hosted password manager.'],
   lookTitle:'Currently looking for', look1:'Junior roles in penetration testing, security operations, security engineering or AI, in Emilia-Romagna. Open to remote work with international teams.',
   asTitle:'Ask the assistant', as1:'Ask about my background, skills or projects. Answers use only the facts on this site.', asPh:'Type a question', asSend:'Send', asThinking:'Thinking…',
@@ -1116,7 +1156,7 @@ it: {
   contactTitle:'Contatti', contact1:'L’email è il modo più rapido per contattarmi. Puoi scrivere in italiano o in inglese.',
   cEmail:'Email', cLinked:'LinkedIn', cGit:'GitHub', vEmail:'abubakarso2004@gmail.com', vLinked:'linkedin.com/in/abu-bakar-siddiq-', vGit:'github.com/abus1dd', open:'Apri', copy:'Copia', copied:'Copiato', copyFail:'Seleziona e copia',
   cvTitle:'Curriculum vitae', cv1:'Un unico PDF con formazione, stage, progetti e certificazioni.', cvBtn:'Scarica il CV (PDF)', cvNote:'PDF · in inglese',
-  phSub:'Tocca un’app. Si apre in una nuova scheda.', phUnlock:'Sblocco', funTitle:'Curiosità', factN:'Curiosità', nextFact:'Un’altra curiosità', nbL1:'Cybersecurity · agenti AI',
+  phSub:'Tocca un’app. Si apre in una nuova scheda.', liteNote:'Versione leggera: il browser sta disegnando la pagina senza scheda grafica, quindi la scrivania 3D è disattivata per restare fluida.', liteChoice:'Versione leggera, come hai scelto.', liteBtn:'Mostra comunque la scrivania 3D', liteBack:'Versione leggera', phUnlock:'Sblocco', funTitle:'Curiosità', factN:'Curiosità', nextFact:'Un’altra curiosità', nbL1:'Cybersecurity · agenti AI',
   facts:['Sono cresciuto parlando bengalese, e oggi lavoro in italiano e in inglese.','Nel 2023 ho vinto “From Idea to Action”, una sfida organizzata da The Doers.','Durante lo stage ho indagato su un agente AI di programmazione che aveva perso dei dati, ricostruendo tutto dai suoi log.','L’Erasmus+ a Málaga è stata la prima volta in cui ho lavorato ogni giorno in inglese, in un team multiculturale.','Gioco ad Apex Legends. Chiedimi qual è il mio main.','Ho creato un’AI che risolve i bug da sola, ma chiede sempre a una persona prima del merge.','Parlo tre lingue e faccio debug in una quarta: Python.','Durante lo stage ho aiutato a configurare Vaultwarden, un password manager self-hosted.'],
   lookTitle:'Sto cercando', look1:'Ruoli junior in penetration testing, security operations, security engineering o AI, in Emilia-Romagna. Disponibile anche da remoto con team internazionali.',
   asTitle:'Chiedi all’assistente', as1:'Fai una domanda sul mio percorso, sulle competenze o sui progetti. Le risposte usano solo le informazioni di questo sito.', asPh:'Scrivi una domanda', asSend:'Invia', asThinking:'Sto pensando…',
@@ -1192,7 +1232,8 @@ const MOBILE = [
 function renderMobile() {
   const card = ([k, c, art]) => `<li><button class="mcard" type="button" data-open="${k}" style="--hl:${c}"><span class="ic"><svg viewBox="0 0 100 100" aria-hidden="true">${art}</svg></span><span class="tx"><b>${esc(t('o_' + k))}</b><span>${esc(t('t_' + k))}</span></span><svg width="12" height="20" viewBox="0 0 12 20" aria-hidden="true"><path d="M2 2L10 10L2 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>`;
   const note = `<li><button class="mcard mnote" type="button" data-open="looking" style="--hl:#C8FF3B"><span class="tx"><small><i class="pulse" aria-hidden="true"></i>${esc(t('lk_k'))}</small><b>${esc(t('lk_s1'))}</b><span>${esc(t('lk_s2'))}</span></span><svg width="12" height="20" viewBox="0 0 12 20" aria-hidden="true"><path d="M2 2L10 10L2 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>`;
-  $('#mlist').innerHTML = note + MOBILE.slice(0, 6).map(card).join('') + `<li class="msep">${esc(t('cue'))}</li>` + MOBILE.slice(6).filter((m) => m[0] !== 'looking').map(card).join('') +
+  const liteNote = LITE && !mobileMQ.matches ? `<li class="mlite"><p>${esc(t(liteWhy === 'choice' ? 'liteChoice' : 'liteNote'))}</p><button class="btn" type="button" data-desk="full">${esc(t('liteBtn'))}</button></li>` : '';
+  $('#mlist').innerHTML = liteNote + note + MOBILE.slice(0, 6).map(card).join('') + `<li class="msep">${esc(t('cue'))}</li>` + MOBILE.slice(6).filter((m) => m[0] !== 'looking').map(card).join('') +
     `<li class="mrow"><button class="mcard" type="button" data-act="theme" style="--hl:#FFC93D"><span class="tx"><b>${esc(t('o_lamp'))}</b></span></button><button class="mcard" type="button" data-act="lang" style="--hl:#00E5FF"><span class="tx"><b>${esc(t('o_radio'))}</b></span></button></li>`;
 }
 
@@ -1200,7 +1241,7 @@ function applyText() {
   root.lang = lang;
   root.classList.toggle('it', lang === 'it');
   $$('[data-t]').forEach((el) => { const v = t(el.dataset.t); if (typeof v === 'string') el.textContent = v; });
-  $('#hud .h').textContent = mobileMQ.matches ? t('hintTouch') : t('hint');
+  $('#hud .h').textContent = isStack() ? t('hintTouch') : t('hint');
   $('#langBtn').setAttribute('aria-label', t('langTo'));
   $('#langEN').style.fontWeight = lang === 'en' ? '700' : '400';
   $('#langIT').style.fontWeight = lang === 'it' ? '700' : '400';
@@ -1370,7 +1411,7 @@ function activate(o) {
 function setThemeClass(day) { root.classList.toggle('day', day); updateThemeLabels(); objs.forEach((o) => { if (o.act === 'theme') o.el.setAttribute('aria-label', themeLabel()); }); try { localStorage.setItem('desk-theme', day ? 'day' : 'night'); } catch (e) {} }
 function toggleTheme() {
   const toDay = !root.classList.contains('day');
-  if (!hasGsap || reduced || mobileMQ.matches) { setThemeClass(toDay); if (!toDay) neonOn(); return; }
+  if (!hasGsap || reduced || isStack()) { setThemeClass(toDay); if (!toDay) neonOn(); return; }
   const veil = $('#veil'); veil.style.background = toDay ? '#FFF4DA' : '#000';
   gsap.timeline()
     .to('#bulb', { opacity: .2, duration: .05, repeat: 3, yoyo: true })
@@ -1418,7 +1459,7 @@ function fillPanel(key, keepFocus) {
   if (!keepFocus) $('#pBody').scrollTop = 0;
 }
 function openPanel(key, o) {
-  const dev = !hasGsap ? null : key === 'contact' ? 'phone' : (key === 'projects' && o && !mobileMQ.matches ? 'laptop' : null);
+  const dev = !hasGsap ? null : key === 'contact' ? 'phone' : (key === 'projects' && o && !isStack() ? 'laptop' : null);
   if (dev) { openDevice(dev, key, o); return; }
   if (device) hideDevice();
   const switching = !!openKey && !panel.hidden;
@@ -1428,7 +1469,7 @@ function openPanel(key, o) {
   if (hasGsap) gsap.killTweensOf(panel);
   panel.hidden = false;
   coVisible = false; coDirty = 4;
-  const desk = !mobileMQ.matches;
+  const desk = !isStack();
   if (hasGsap) {
     gsap.to(['#hud', '#cue'], { opacity: 0, duration: .3, overwrite: 'auto' });
     if (desk && o && !o.wall) zoomTo(o);
@@ -1452,7 +1493,7 @@ function closePanel() {
   const done = () => { panel.hidden = true; gsap.set(panel, { clearProps: 'opacity,transform' }); };
   if (hasGsap) {
     if (reduced) gsap.to(panel, { opacity: 0, duration: .2, onComplete: done });
-    else if (!mobileMQ.matches) gsap.to(panel, { opacity: 0, x: 40, duration: .35, ease: 'power2.in', onComplete: done });
+    else if (!isStack()) gsap.to(panel, { opacity: 0, x: 40, duration: .35, ease: 'power2.in', onComplete: done });
     else gsap.to(panel, { yPercent: 100, duration: .35, ease: 'power2.in', onComplete: done });
     unzoom();
     gsap.to(['#hud', '#cue'], { opacity: 1, duration: .5, delay: .6 });
@@ -1471,6 +1512,7 @@ panel.addEventListener('click', (e) => {
 });
 function selectRow(b) { const s = b.previousElementSibling; const r = document.createRange(); r.selectNodeContents(s); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
 $('#mlist').addEventListener('click', (e) => {
+  const dm = e.target.closest('[data-desk]'); if (dm) { setDeskMode(dm.dataset.desk); return; }
   const b = e.target.closest('.mcard'); if (!b) return;
   if (b.dataset.act === 'theme') toggleTheme(); else if (b.dataset.act === 'lang') toggleLang(); else openPanel(b.dataset.open, null);
 });
@@ -1480,7 +1522,7 @@ document.addEventListener('click', (e) => { const b = e.target.closest('.plain .
 const fxTl = {};
 let activeKey = null;
 const ONESHOT = new Set(['fun', 'looking', 'projects']);
-const fxOK = () => hasGsap && !reduced && !mobileMQ.matches;
+const fxOK = () => hasGsap && !reduced && !isStack();
 const PDELAY = { about: 1.05, cv: 1.15, contact: .9, fun: 1.0, journey: 2.0, skills: 1.2, certs: 1.75, projects: 1.4, looking: .5 };
 function runFx(key) {
   if (activeKey && activeKey !== key) endFx();
@@ -1631,7 +1673,7 @@ function openDevice(dev, key, o) {
   openKey = key; device = dev; trigger = o ? o.el : document.activeElement;
   coVisible = false; coDirty = 4;
   gsap.to(['#hud', '#cue'], { opacity: 0, duration: .3, overwrite: 'auto' });
-  const desk = !mobileMQ.matches && !!o;
+  const desk = !isStack() && !!o;
   if (o) hoverOff(o);
   if (desk) { zoomTo(o, dev === 'laptop'); runFx(key); }
   if (dev === 'phone') showPhone(desk ? o : null); else showLaptop();
@@ -1853,7 +1895,7 @@ function onPan() {
   if (!zoomed && !(camTween && camTween.isActive())) { Object.assign(cam, baseCam()); applyCam(); }
 }
 function ensureRevealed(o) {
-  if (o.reveal === null || mobileMQ.matches) return;
+  if (o.reveal === null || isStack()) return;
   if (pan < o.reveal + 120) {
     const desk = $('#desk'); const top = desk.getBoundingClientRect().top + scrollY;
     const range = desk.offsetHeight - stick.clientHeight;
@@ -1987,7 +2029,7 @@ if (hasGsap && !reduced) {
 }
 let idleOn = false;
 function startIdle() {
-  if (!hasGsap || reduced || idleOn || mobileMQ.matches) return;
+  if (!hasGsap || reduced || idleOn || isStack()) return;
   idleOn = true;
   $$('.steam').forEach((p, i) => {
     gsap.timeline({ repeat: -1, delay: i * 1.1, repeatDelay: .4 })
@@ -2033,6 +2075,11 @@ function intro() {
   later.forEach((o) => { o.el.style.visibility = 'hidden'; gsap.set(o.dropEl, { z: 240 }); });
   if (reduced) { front.forEach((o) => { o.revealed = true; }); coDirty = 10; return; }
   const sk = $('#skipIntro'); sk.hidden = false;
+  if (!FORCED_FULL) {
+    let n = 0, t0 = 0;
+    const tick = (t) => { if (!t0) t0 = t; n++; if (t - t0 < 1600) requestAnimationFrame(tick); else if (n / ((t - t0) / 1000) < 15) goLite('slow'); };
+    requestAnimationFrame(tick);
+  }
   front.forEach((o) => { o.revealed = false; });
   coVisible = false;
   const drops = front.map((o) => o.el).concat(decor.map((d) => d.el));
@@ -2100,7 +2147,7 @@ if ('IntersectionObserver' in window) {
   new IntersectionObserver(([en]) => {
     const on = en.isIntersecting;
     root.classList.toggle('deskoff', !on);
-    if (!mobileMQ.matches) setLoops(on);
+    if (!isStack()) setLoops(on);
   }, { rootMargin: '-4px 0px' }).observe($('#desk'));
 }
 
@@ -2110,8 +2157,8 @@ try { if (!localStorage.getItem('desk-lang') && (navigator.language || '').toLow
 applyText();
 objs.forEach(bindObj);
 fitStage(); applyCam();
-let rz = 0; addEventListener('resize', () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { fitStage(); if (device === 'laptop') requestAnimationFrame(placeLap); $('#hud .h').textContent = mobileMQ.matches ? t('hintTouch') : t('hint'); }); });
-mobileMQ.addEventListener('change', () => { applyText(); if (openKey) closePanel(); if (!mobileMQ.matches && !(introTl && introTl.isActive())) startIdle(); });
+let rz = 0; addEventListener('resize', () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(() => { fitStage(); if (device === 'laptop') requestAnimationFrame(placeLap); $('#hud .h').textContent = isStack() ? t('hintTouch') : t('hint'); }); });
+mobileMQ.addEventListener('change', () => { applyText(); if (openKey) closePanel(); if (!isStack() && !(introTl && introTl.isActive())) startIdle(); });
 
 if (hasGsap) {
   gsap.registerPlugin(ScrollTrigger);
@@ -2120,8 +2167,8 @@ if (hasGsap) {
   const proxy = { pan: 0 };
   gsap.to(proxy, { pan: PANMAX, ease: 'none', scrollTrigger: { trigger: '#desk', start: 'top top', end: 'bottom bottom', scrub: 1 }, onUpdate: () => { pan = proxy.pan; onPan(); } });
   gsap.ticker.add(() => { if (coDirty > 0) { coDirty--; placeCallouts(); } });
-  if (!mobileMQ.matches) intro(); else { objs.forEach((o) => { o.revealed = true; }); }
-  if (!reduced && mobileMQ.matches) gsap.from('#mlist > li', { opacity: 0, y: 18, duration: .5, stagger: .05, ease: 'power3.out', clearProps: 'all' });
+  if (!isStack()) intro(); else { objs.forEach((o) => { o.revealed = true; }); }
+  if (!reduced && isStack()) gsap.from('#mlist > li', { opacity: 0, y: 18, duration: .5, stagger: .05, ease: 'power3.out', clearProps: 'all' });
 } else {
   objs.forEach((o) => { o.revealed = true; });
   placeCallouts();
