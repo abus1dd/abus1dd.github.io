@@ -50,5 +50,5 @@ GoatCounter (`https://abus1dd.goatcounter.com/count`), registered and counting. 
 ## Open items
 
 - [x] Register `abus1dd` on GoatCounter (done 2026-10-29; stats at https://abus1dd.goatcounter.com).
-- [ ] Check the LinkedIn preview with linkedin.com/post-inspector.
+- [x] LinkedIn preview checked with Post Inspector (2026-10-29): title, image and URL show correctly.
 - [ ] Later: live AI assistant via a small backend (e.g. a Cloudflare Worker with daily caps).
