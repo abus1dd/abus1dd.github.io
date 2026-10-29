@@ -1,0 +1,22 @@
+{
+  // Cloudflare Worker for the portfolio assistant. Deploy with: npx wrangler deploy
+  "name": "abu-assistant",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+
+  // Workers AI, reached through a binding: no API key in the code.
+  "ai": { "binding": "AI" },
+
+  // Only these sites may call the assistant from a browser (comma-separated).
+  "vars": {
+    "ALLOWED_ORIGINS": "https://abus1dd.github.io",
+    "MODEL": "@cf/qwen/qwen3-30b-a3b-fp8"
+  },
+
+  // Per-visitor limit: 6 questions per minute. If your plan rejects this block,
+  // delete it: the Worker also has a smaller built-in limit.
+  "ratelimits": [
+    { "name": "RATE_LIMITER", "namespace_id": "7301", "simple": { "limit": 6, "period": 60 } }
+  ]
+}

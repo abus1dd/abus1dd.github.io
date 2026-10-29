@@ -1047,6 +1047,8 @@ const LINKS = {
   portfolio: 'https://github.com/abus1dd/abus1dd.github.io',
   cv: 'assets/Abu-Bakar-Siddiq-CV.pdf',
   shot: 'assets/portfolio-desk.webp',
+  /* Live AI assistant (Cloudflare Worker). Paste the Worker URL here once it is deployed; empty = scripted answers only. */
+  assistant: window.ABU_ASSISTANT_URL || '',
   video: 'assets/ai-issue-resolution-workflow.mp4',
   poster: 'assets/ai-issue-resolution-workflow-poster.jpg'
 };
@@ -1123,7 +1125,7 @@ en: {
   facts:['I grew up speaking Bengali, and now I work in Italian and English.','In 2023 I won “From Idea to Action”, a challenge run by The Doers.','During my internship I investigated an AI coding agent that had lost data, by tracing back through its own logs.','My Erasmus+ in Málaga was the first time I worked in English every day, in a multicultural team.','I play Apex Legends. Ask me who my main is.','I built an AI that fixes bugs on its own, but it always asks a human before merging.','I speak three languages and debug in a fourth: Python.','During my internship I helped set up Vaultwarden, a self-hosted password manager.'],
   lookTitle:'Currently looking for', look1:'Junior roles in penetration testing, security operations, security engineering or AI, in Emilia-Romagna. Open to remote work with international teams.',
   asTitle:'Ask the assistant', as1:'Ask about my background, skills or projects. Answers use only the facts on this site.', asPh:'Type a question', asSend:'Send', asThinking:'Thinking…',
-  asOffline:'Quick answers. The live assistant isn’t available in this view.', asErr:'The assistant couldn’t answer just now. Try again in a moment.', asOff:'The live assistant is turned off for this view, so you’ll get quick answers instead.',
+  asOffline:'Quick answers. The live assistant isn’t available in this view.', asLive:'Answers are written by AI from the facts on this site and can be imperfect. For anything important, email Abu.', asRest:'The live AI is resting right now, so you get quick answers instead.', asBusy:'That’s a lot of questions at once. Wait a minute, then ask again.', asErr:'The assistant couldn’t answer just now. Try again in a moment.', asOff:'The live assistant is turned off for this view, so you’ll get quick answers instead.',
   sugs:['What did you do at Nabla2?','What does the AI workflow do?','Which roles are you looking for?'],
   foot:'Built as an interactive desk with HTML, CSS, SVG and GSAP.'
 },
@@ -1160,7 +1162,7 @@ it: {
   facts:['Sono cresciuto parlando bengalese, e oggi lavoro in italiano e in inglese.','Nel 2023 ho vinto “From Idea to Action”, una sfida organizzata da The Doers.','Durante lo stage ho indagato su un agente AI di programmazione che aveva perso dei dati, ricostruendo tutto dai suoi log.','L’Erasmus+ a Málaga è stata la prima volta in cui ho lavorato ogni giorno in inglese, in un team multiculturale.','Gioco ad Apex Legends. Chiedimi qual è il mio main.','Ho creato un’AI che risolve i bug da sola, ma chiede sempre a una persona prima del merge.','Parlo tre lingue e faccio debug in una quarta: Python.','Durante lo stage ho aiutato a configurare Vaultwarden, un password manager self-hosted.'],
   lookTitle:'Sto cercando', look1:'Ruoli junior in penetration testing, security operations, security engineering o AI, in Emilia-Romagna. Disponibile anche da remoto con team internazionali.',
   asTitle:'Chiedi all’assistente', as1:'Fai una domanda sul mio percorso, sulle competenze o sui progetti. Le risposte usano solo le informazioni di questo sito.', asPh:'Scrivi una domanda', asSend:'Invia', asThinking:'Sto pensando…',
-  asOffline:'Risposte rapide. L’assistente dal vivo non è disponibile qui.', asErr:'L’assistente non riesce a rispondere ora. Riprova tra poco.', asOff:'L’assistente dal vivo è disattivato qui, quindi ricevi risposte rapide.',
+  asOffline:'Risposte rapide. L’assistente dal vivo non è disponibile qui.', asLive:'Le risposte sono scritte dall’AI in base alle informazioni di questo sito e possono essere imprecise. Per le cose importanti, scrivi ad Abu.', asRest:'L’AI dal vivo è in pausa, quindi ricevi risposte rapide.', asBusy:'Troppe domande in poco tempo. Aspetta un minuto e riprova.', asErr:'L’assistente non riesce a rispondere ora. Riprova tra poco.', asOff:'L’assistente dal vivo è disattivato qui, quindi ricevi risposte rapide.',
   sugs:['Cosa hai fatto in Nabla2?','Cosa fa il workflow AI?','Che ruoli stai cercando?'],
   foot:'Realizzato come scrivania interattiva con HTML, CSS, SVG e GSAP.'
 }};
@@ -1948,7 +1950,7 @@ document.addEventListener('click', async (e) => {
 if (window.claude && typeof window.claude.use === 'function') {
   window.claude.use('sample').then((fn) => { sampleFn = fn; sampleState = fn ? 'ready' : 'none'; refreshNote(); }).catch(() => { sampleState = 'none'; refreshNote(); });
 } else { sampleState = 'none'; }
-function refreshNote() { const n = $('#asNote'); if (!n) return; n.textContent = sampleState === 'none' ? t('asOffline') : sampleState === 'off' ? t('asOff') : ''; }
+function refreshNote() { const n = $('#asNote'); if (!n) return; if (sampleState !== 'ready' && LINKS.assistant) { n.textContent = workerState === 'down' ? t('asRest') : t('asLive'); return; } n.textContent = sampleState === 'none' ? t('asOffline') : sampleState === 'off' ? t('asOff') : ''; }
 function addMsg(role, text) { const chat = $('#chat'); const d = document.createElement('div'); d.className = 'msg ' + (role === 'user' ? 'u' : 'a'); d.textContent = text; chat.append(d); chat.scrollTop = chat.scrollHeight; return d; }
 function setupChat() {
   const chat = $('#chat');
@@ -1957,7 +1959,19 @@ function setupChat() {
   $('#sugs').addEventListener('click', (e) => { const b = e.target.closest('.sug'); if (b) ask(b.textContent); });
   $('#askForm').addEventListener('submit', (e) => { e.preventDefault(); const v = $('#askInput').value.trim(); if (v) { $('#askInput').value = ''; ask(v); } });
 }
-let asking = false;
+let asking = false, workerState = 'ok';
+async function askWorker(q) {
+  const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 15000);
+  try {
+    const r = await fetch(LINKS.assistant, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: chatTurns.slice(-8), lang }), signal: ctl.signal });
+    const j = await r.json().catch(() => ({}));
+    if (r.ok && j.answer) return j.answer;
+    if (j.error === 'rate_limited') return t('asBusy');
+    workerState = 'down'; refreshNote();
+  } catch (e) { workerState = 'down'; refreshNote(); }
+  finally { clearTimeout(to); }
+  return offlineAnswer(q);
+}
 async function ask(q) {
   if (asking) return; asking = true;
   addMsg('user', q); chatTurns.push({ role: 'user', content: q });
@@ -1974,6 +1988,8 @@ async function ask(q) {
       else if (code === 'cancelled') { answer = e.text || ''; }
       else { answer = (e && e.text) || t('asErr'); }
     }
+  } else if (LINKS.assistant && workerState !== 'down') {
+    answer = await askWorker(q);
   } else {
     await new Promise((r) => setTimeout(r, 350));
     answer = offlineAnswer(q);
