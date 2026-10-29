@@ -51,4 +51,4 @@ GoatCounter (`https://abus1dd.goatcounter.com/count`), registered and counting. 
 
 - [x] Register `abus1dd` on GoatCounter (done 2026-10-29; stats at https://abus1dd.goatcounter.com).
 - [x] LinkedIn preview checked with Post Inspector (2026-10-29): title, image and URL show correctly.
-- [ ] Live AI assistant: Worker written and tested in `worker/` (see `worker/README.md`). To do: deploy it with `npx wrangler deploy`, then set `LINKS.assistant` in `index.html` to the Worker URL.
+- [x] Live AI assistant (2026-10-29): Worker `abu-assistant` deployed at https://abu-assistant.abus1dd.workers.dev (model `@cf/qwen/qwen3-30b-a3b-fp8`, rate limit 6/min). Site connected via `LINKS.assistant`. After editing `worker/src/index.js`, run `npx wrangler deploy` from `worker/`.
