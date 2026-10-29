@@ -22,7 +22,7 @@ A single self-contained `index.html` (HTML, CSS, SVG, GSAP 3.12.5 + ScrollTrigge
 | CV folder | CV | Flap opens, page rises; downloads `assets/Abu-Bakar-Siddiq-CV.pdf` |
 | Lamp | Day / night | Head nods, theme switches |
 | Radio | EN / IT | Knob spins, static, language switches |
-| Desk companion | AI assistant | Live AI via the Cloudflare Worker in `worker/` once `LINKS.assistant` is set; scripted answers as fallback |
+| Desk companion | AI assistant | Live AI via the Cloudflare Worker in `worker/` (abu-assistant.abus1dd.workers.dev); scripted answers as fallback |
 | Plant (scroll) | Skills | Skill tags pop out |
 | Calendar (scroll) | Journey | Month pages flip, timeline lights up |
 | Keyboard (scroll) | Certifications | Key wave, dragon hologram, four Cisco badges with Credly links |
