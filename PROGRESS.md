@@ -30,9 +30,15 @@ A single self-contained `index.html` (HTML, CSS, SVG, GSAP 3.12.5 + ScrollTrigge
 
 Mobile shows the objects as a stacked list; reduced-motion users get fades instead of zooms; a plain-text version of every section sits below the desk; a `<noscript>` block covers browsers without JavaScript.
 
+## Security
+
+- Content Security Policy (meta tag): scripts only from the site itself (inline script allowed by hash) and GoatCounter; connections only to the assistant Worker and GoatCounter; images from the site, Credly and GoatCounter; no plugins, no forms posting anywhere.
+- GSAP 3.12.5 and ScrollTrigger are self-hosted in `assets/js/` (no third-party CDN).
+- The inline script hash in the CSP must change whenever the script changes: the build step computes it.
+
 ## Assets
 
-`assets/Abu-Bakar-Siddiq-CV.pdf`, `assets/ai-issue-resolution-workflow.mp4` + `-poster.jpg`, `assets/portfolio-desk.webp` (projects thumbnail), `assets/og-image.png` (link preview), `favicon.svg`.
+`assets/Abu-Bakar-Siddiq-CV.pdf`, `assets/dragon-hologram.webp` (lazy-loaded), `assets/js/` (GSAP), `404.html` (themed not-found page), `assets/ai-issue-resolution-workflow.mp4` + `-poster.jpg`, `assets/portfolio-desk.webp` (projects thumbnail), `assets/og-image.png` (link preview), `favicon.svg`.
 
 ## Contact links
 
@@ -46,6 +52,8 @@ GoatCounter (`https://abus1dd.goatcounter.com/count`), registered and counting. 
 
 - 2026-10-29: fewer constant repaints (rain and circuit lines are compositor-only, no live backdrop blur), camera moves reuse layers while moving.
 - 2026-10-29: light mode. Browsers drawing without a graphics card (software WebGL) or running the opening below 15 fps get the card layout, with a "Show the 3D desk anyway" button. `?desk=full` / `?desk=lite` in the URL forces a mode (remembered in localStorage).
+
+- 2026-10-29: Lighthouse (lab, local server): desktop 99 performance / 100 accessibility / 100 SEO; mobile 83 / 100 / 100. Inline script minified, dragon image lazy-loaded, desk maths skipped while the desk is hidden.
 
 ## Open items
 
