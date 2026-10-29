@@ -40,10 +40,15 @@ Defined once in the `LINKS` object near the top of the script in `index.html`.
 
 ## Analytics
 
-GoatCounter script points at `https://abus1dd.goatcounter.com/count`. It counts nothing until the `abus1dd` code is registered on goatcounter.com.
+GoatCounter (`https://abus1dd.goatcounter.com/count`), registered and counting. No cookies.
+
+## Performance
+
+- 2026-10-29: fewer constant repaints (rain and circuit lines are compositor-only, no live backdrop blur), camera moves reuse layers while moving.
+- 2026-10-29: light mode. Browsers drawing without a graphics card (software WebGL) or running the opening below 15 fps get the card layout, with a "Show the 3D desk anyway" button. `?desk=full` / `?desk=lite` in the URL forces a mode (remembered in localStorage).
 
 ## Open items
 
-- [ ] Register `abus1dd` on GoatCounter (or change the code in `index.html`).
+- [x] Register `abus1dd` on GoatCounter (done 2026-10-29; stats at https://abus1dd.goatcounter.com).
 - [ ] Check the LinkedIn preview with linkedin.com/post-inspector.
 - [ ] Later: live AI assistant via a small backend (e.g. a Cloudflare Worker with daily caps).
