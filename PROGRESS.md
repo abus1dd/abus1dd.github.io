@@ -9,6 +9,10 @@ Read this first in any new session. It records what is decided, what is done and
 
 The Desk redesign was merged into `main` on 2026-10-29 and is the live site at https://abus1dd.github.io/.
 
+## How to edit
+
+Edit `src/desk.html` (the source), then run `python tools/build.py` from the repo root to regenerate `index.html`. Never edit `index.html` by hand: the build minifies the script and writes the CSP hash, and a hand edit to the script would make the browser block it.
+
 ## What the site is
 
 A single self-contained `index.html` (HTML, CSS, SVG, GSAP 3.12.5 + ScrollTrigger from cdnjs). All text, English and Italian, lives inside the page's script; `content/content.json` is the old site's text, kept only as a reference.
