@@ -38,7 +38,7 @@
   --pool:rgba(255,186,84,.26); --spool:rgba(0,229,255,.18); --mpool:rgba(255,61,203,.14); --refl:rgba(255,61,203,.2);
   --halo:26px; --keyglow:rgba(0,229,255,.5); --scrglow:0 0 60px rgba(0,229,255,.35),0 0 140px rgba(0,229,255,.16);
   --steam:rgba(200,235,255,.65); --shadow:rgba(0,0,0,.78);
-  --glass:rgba(7,12,28,.95); --chip:rgba(5,9,20,.82); --card:#0B1330; --card2:#101A3D;
+  --glass:#070C1C; --chip:rgba(5,9,20,.82); --card:#0B1330; --card2:#101A3D;
   --lblbg:#00E5FF; --lblfg:#02050D; --paper:#DDEBF7; --ink:#0B1124; --note:#C8FF3B;
   --f-disp:'Unbounded','Arial Black',system-ui,sans-serif;
   --f-neon:'Tilt Neon','Trebuchet MS',system-ui,sans-serif;
@@ -56,7 +56,7 @@
   --pool:rgba(255,255,255,0); --spool:rgba(0,229,255,.05); --mpool:rgba(255,255,255,0); --refl:rgba(255,255,255,0);
   --halo:0px; --keyglow:rgba(255,255,255,.14); --scrglow:0 12px 30px rgba(60,40,20,.25);
   --steam:rgba(80,90,110,.5); --shadow:rgba(60,40,20,.42);
-  --glass:rgba(252,248,240,.94); --chip:rgba(255,253,247,.94); --card:#FFFDF7; --card2:#F3ECDF;
+  --glass:#FCF8F0; --chip:rgba(255,253,247,.94); --card:#FFFDF7; --card2:#F3ECDF;
   --lblbg:#1B2433; --lblfg:#FFFDF7; --paper:#FFFDF7; --ink:#1B2433; --note:#F7D774;
   color-scheme:light;
 }
@@ -374,7 +374,15 @@ button{font:inherit;color:inherit}
 .day .btn{color:#fff}
 .btn[disabled]{opacity:.55;cursor:not-allowed}
 .note{font-size:14px;color:var(--muted)}
-.chat{display:flex;flex-direction:column;gap:10px;margin:8px 0 14px;max-height:340px;overflow:auto}
+.chat{display:flex;flex-direction:column;gap:10px;margin:8px 0 14px}
+.panel.pchat{display:flex;flex-direction:column;overflow:hidden}
+.panel.pchat>.pBack,.panel.pchat>.pKick,.panel.pchat>h2{flex:none}
+.panel.pchat>.pBack{align-self:flex-start}
+.panel.pchat .pBody{flex:1;min-height:0;display:flex;flex-direction:column}
+.panel.pchat .pBody>p:first-child{flex:none}
+.panel.pchat .chat{flex:1;min-height:80px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px;scrollbar-width:thin}
+.panel.pchat .sugs,.panel.pchat .ask,.panel.pchat .note{flex:none}
+.panel.pchat .note{margin:10px 0 0}
 .msg{max-width:90%;padding:10px 14px;border-radius:14px;font-size:15px;line-height:1.45;white-space:pre-wrap}
 .msg.u{align-self:flex-end;background:var(--cyan);color:var(--lblfg);border-bottom-right-radius:4px}
 .day .msg.u{color:#fff}
@@ -441,6 +449,7 @@ button{font:inherit;color:inherit}
   .skip{order:5;font-size:13px;padding:0 12px}
   .brand b{font-size:12px}
   .panel{top:auto;left:0;right:0;bottom:0;width:auto;max-height:84vh;max-height:84dvh;border-radius:22px 22px 0 0;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-bottom:max(28px,env(safe-area-inset-bottom,0px))}
+  .panel.pchat{height:84vh;height:84dvh}
 }
 @media (max-width:760px){ .top{gap:10px;padding-block:8px} .skip{min-height:36px} }
 
@@ -1124,9 +1133,9 @@ en: {
   phSub:'Tap an app. It opens in a new tab.', liteNote:'Light version: your browser is drawing this page without its graphics card, so the 3D desk is switched off to keep things smooth.', liteChoice:'Light version, as you chose.', liteBtn:'Show the 3D desk anyway', liteBack:'Light version', phUnlock:'Unlocking', funTitle:'Fun fact', factN:'Fact', nextFact:'Another fun fact', nbL1:'Cybersecurity · AI agents', cs1:'2025', cs2:'2026', cs3:'2026',
   facts:['I grew up speaking Bengali, and now I work in Italian and English.','In 2023 I won “From Idea to Action”, a challenge run by The Doers.','During my internship I investigated an AI coding agent that had lost data, by tracing back through its own logs.','My Erasmus+ in Málaga was the first time I worked in English every day, in a multicultural team.','I play Apex Legends. Ask me who my main is.','I built an AI that fixes bugs on its own, but it always asks a human before merging.','I speak three languages and debug in a fourth: Python.','During my internship I helped set up Vaultwarden, a self-hosted password manager.'],
   lookTitle:'Currently looking for', look1:'Junior roles in penetration testing, security operations, security engineering or AI, in Emilia-Romagna. Open to remote work with international teams.',
-  asTitle:'Ask the assistant', as1:'Ask about my background, skills or projects. Answers use only the facts on this site.', asPh:'Type a question', asSend:'Send', asThinking:'Thinking…',
+  asTitle:'Ask the assistant', as1:'Ask anything about Abu’s background, skills or projects. Answers use only the facts on this site.', asPh:'Type a question', asSend:'Send', asThinking:'Thinking…',
   asOffline:'Quick answers. The live assistant isn’t available in this view.', asLive:'Answers are written by AI from the facts on this site and can be imperfect. For anything important, email Abu.', asRest:'The live AI is resting right now, so you get quick answers instead.', asBusy:'That’s a lot of questions at once. Wait a minute, then ask again.', asErr:'The assistant couldn’t answer just now. Try again in a moment.', asOff:'The live assistant is turned off for this view, so you’ll get quick answers instead.',
-  sugs:['What did you do at Nabla2?','What does the AI workflow do?','Which roles are you looking for?'],
+  sugs:['What did Abu do at Nabla2?','What does his AI workflow do?','What roles is Abu looking for?'],
   foot:'Built as an interactive desk with HTML, CSS, SVG and GSAP.'
 },
 it: {
@@ -1161,9 +1170,9 @@ it: {
   phSub:'Tocca un’app. Si apre in una nuova scheda.', liteNote:'Versione leggera: il browser sta disegnando la pagina senza scheda grafica, quindi la scrivania 3D è disattivata per restare fluida.', liteChoice:'Versione leggera, come hai scelto.', liteBtn:'Mostra comunque la scrivania 3D', liteBack:'Versione leggera', phUnlock:'Sblocco', funTitle:'Curiosità', factN:'Curiosità', nextFact:'Un’altra curiosità', nbL1:'Cybersecurity · agenti AI',
   facts:['Sono cresciuto parlando bengalese, e oggi lavoro in italiano e in inglese.','Nel 2023 ho vinto “From Idea to Action”, una sfida organizzata da The Doers.','Durante lo stage ho indagato su un agente AI di programmazione che aveva perso dei dati, ricostruendo tutto dai suoi log.','L’Erasmus+ a Málaga è stata la prima volta in cui ho lavorato ogni giorno in inglese, in un team multiculturale.','Gioco ad Apex Legends. Chiedimi qual è il mio main.','Ho creato un’AI che risolve i bug da sola, ma chiede sempre a una persona prima del merge.','Parlo tre lingue e faccio debug in una quarta: Python.','Durante lo stage ho aiutato a configurare Vaultwarden, un password manager self-hosted.'],
   lookTitle:'Sto cercando', look1:'Ruoli junior in penetration testing, security operations, security engineering o AI, in Emilia-Romagna. Disponibile anche da remoto con team internazionali.',
-  asTitle:'Chiedi all’assistente', as1:'Fai una domanda sul mio percorso, sulle competenze o sui progetti. Le risposte usano solo le informazioni di questo sito.', asPh:'Scrivi una domanda', asSend:'Invia', asThinking:'Sto pensando…',
+  asTitle:'Chiedi all’assistente', as1:'Fai una domanda sul percorso, sulle competenze o sui progetti di Abu. Le risposte usano solo le informazioni di questo sito.', asPh:'Scrivi una domanda', asSend:'Invia', asThinking:'Sto pensando…',
   asOffline:'Risposte rapide. L’assistente dal vivo non è disponibile qui.', asLive:'Le risposte sono scritte dall’AI in base alle informazioni di questo sito e possono essere imprecise. Per le cose importanti, scrivi ad Abu.', asRest:'L’AI dal vivo è in pausa, quindi ricevi risposte rapide.', asBusy:'Troppe domande in poco tempo. Aspetta un minuto e riprova.', asErr:'L’assistente non riesce a rispondere ora. Riprova tra poco.', asOff:'L’assistente dal vivo è disattivato qui, quindi ricevi risposte rapide.',
-  sugs:['Cosa hai fatto in Nabla2?','Cosa fa il workflow AI?','Che ruoli stai cercando?'],
+  sugs:['Cosa ha fatto Abu in Nabla2?','Cosa fa il suo workflow AI?','Che ruoli cerca Abu?'],
   foot:'Realizzato come scrivania interattiva con HTML, CSS, SVG e GSAP.'
 }};
 let lang = 'en';
@@ -1457,6 +1466,7 @@ function fillPanel(key, keepFocus) {
   $('#pKick').textContent = t('k_' + key);
   $('#pTitle').textContent = t(TITLES[key]);
   $('#pBody').innerHTML = B[key]();
+  panel.classList.toggle('pchat', key === 'assistant');
   if (key === 'assistant') setupChat();
   if (!keepFocus) $('#pBody').scrollTop = 0;
 }
@@ -1923,8 +1933,15 @@ const FACTS = `Facts about Abu Bakar Siddiq (use only these):
 - Looking for junior roles in penetration testing, security operations, security engineering or AI in Emilia-Romagna; open to remote work with international teams.
 - Contact: email abubakarso2004@gmail.com, LinkedIn linkedin.com/in/abu-bakar-siddiq-, GitHub github.com/abus1dd. The CV PDF can be downloaded from the CV folder on the desk.`;
 const RULES = `You are the assistant on Abu Bakar Siddiq's portfolio website. Answer visitors' questions about Abu in 1-3 short sentences, in the same language as the question (English or Italian). Speak about Abu in the third person. Use only the facts below; if the answer is not there, say you don't know and suggest using the Contact section. Never invent details.\n\n${FACTS}`;
+const IT_WORDS = /\b(che|cosa|cos|chi|come|dove|quando|quale|quali|perch[eé]|ha|hai|sono|è|il|lo|la|gli|le|di|del|della|dei|delle|un|una|uno|per|con|nel|nella|sul|lavoro|lavora|esperienza|competenze|certificazioni|progetti|cerca|fatto|studiato|lingue|parla|contattare|contatto|ciao|buongiorno|grazie)\b/gi;
+const EN_WORDS = /\b(what|which|who|how|where|when|why|does|did|do|is|are|was|has|have|the|a|an|of|for|with|his|he|him|work|worked|experience|skills|certifications|projects|looking|roles|languages|speak|contact|hello|hi|thanks)\b/gi;
+function qLang(q) {
+  const it = (q.match(IT_WORDS) || []).length, en = (q.match(EN_WORDS) || []).length;
+  if (/[àèéìòù]/i.test(q)) return 'it';
+  return it > en ? 'it' : en > it ? 'en' : lang;
+}
 function offlineAnswer(q) {
-  const s = q.toLowerCase(), it = lang === 'it';
+  const s = q.toLowerCase(), it = qLang(q) === 'it';
   const A = (en, itx) => (it ? itx : en);
   if (/nabla/.test(s)) return A('At Nabla2 in Modena (April–July 2026) Abu worked on web application security, vulnerability assessment, Linux and Active Directory administration, and agentic tooling.', 'In Nabla2 a Modena (aprile–luglio 2026) Abu si è occupato di sicurezza delle applicazioni web, vulnerability assessment, amministrazione Linux e Active Directory e strumenti agentici.');
   if (/europroyect|málaga|malaga|erasmus/.test(s)) return A('Abu did an Erasmus+ internship at Europroyectos in Málaga (July–October 2025), working on web development and security.', 'Abu ha svolto uno stage Erasmus+ presso Europroyectos a Málaga (luglio–ottobre 2025), su sviluppo web e sicurezza.');
@@ -1963,10 +1980,10 @@ let asking = false, workerState = 'ok';
 async function askWorker(q) {
   const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 15000);
   try {
-    const r = await fetch(LINKS.assistant, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: chatTurns.slice(-8), lang }), signal: ctl.signal });
+    const r = await fetch(LINKS.assistant, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: chatTurns.slice(-8), lang: qLang(q) }), signal: ctl.signal });
     const j = await r.json().catch(() => ({}));
     if (r.ok && j.answer) return j.answer;
-    if (j.error === 'rate_limited') return t('asBusy');
+    if (j.error === 'rate_limited') return I[qLang(q)].asBusy;
     workerState = 'down'; refreshNote();
   } catch (e) { workerState = 'down'; refreshNote(); }
   finally { clearTimeout(to); }
