@@ -255,6 +255,33 @@ button{font:inherit;color:inherit}
 .kband{position:absolute;left:14px;top:14px;width:392px;height:104px;overflow:hidden;border-radius:6px;pointer-events:none;transform:translateZ(calc(var(--t) + 1px))}
 .kband i{position:absolute;top:0;bottom:0;left:-150px;width:140px;opacity:0;background:linear-gradient(90deg,rgba(255,61,203,0),rgba(255,61,203,.55) 45%,rgba(255,180,240,.75) 50%,rgba(255,61,203,.55) 55%,rgba(255,61,203,0))}
 .plain section{content-visibility:auto;contain-intrinsic-size:auto 700px}
+/* Root access + blueprint mode */
+.tkey{margin:6px 0 8px;display:flex;flex-direction:column;gap:6px;max-width:260px}
+.tkbtn{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;border:1px solid #E0B24A;background:#0E1838;color:#FFE7A8;font:500 10px/1.3 var(--f-mono);cursor:pointer;text-align:left}
+.tkbtn:hover,.tkbtn:focus-visible{background:#1A2550;outline:none;box-shadow:0 0 0 2px rgba(224,178,74,.6)}
+.tkbtn svg{flex:none}
+.tkbtn .pad{animation:tkpulse 1s ease-in-out infinite;transform-origin:center}
+.tkbtn[disabled]{opacity:.55;cursor:default}
+.tkbtn[disabled] .pad{animation:none}
+.tkbar{display:block;height:3px;border-radius:2px;background:#16224A;overflow:hidden}
+.tkbar i{display:block;height:100%;background:#E0B24A;transform-origin:0 50%;animation:tkcount 8s linear forwards}
+.tkey.done .tkbar i,.tkey.fail .tkbar i{animation:none}
+.tkey.done .tkbar i{background:#B6FF3B}
+.tkey.fail .tkbar i{background:#FF3DCB;transform:scaleX(0)}
+@keyframes tkpulse{50%{opacity:.35}}
+@keyframes tkcount{to{transform:scaleX(0)}}
+.tout .ok{color:#B6FF3B}
+.tp.root{color:#FF3DCB}
+.xbar{position:fixed;z-index:44;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:12px;max-width:calc(100vw - 32px);padding:8px 8px 8px 16px;border-radius:999px;background:#0A2A5E;border:1px solid #9BD8FF;color:#DDF3FF;font:500 12px/1.3 var(--f-mono);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.xbar button{flex:none;min-height:34px;padding:0 14px;border-radius:999px;border:0;background:#DDF3FF;color:#0A2A5E;font:600 12px/1 var(--f-body);cursor:pointer}
+.xdot{flex:none;width:8px;height:8px;border-radius:50%;background:#9BD8FF;box-shadow:0 0 10px #9BD8FF}
+.xray .surface{background-color:#0B2B5C;background-image:linear-gradient(rgba(190,230,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(190,230,255,.14) 1px,transparent 1px),linear-gradient(rgba(190,230,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(190,230,255,.06) 1px,transparent 1px);background-size:120px 120px,120px 120px,24px 24px,24px 24px}
+.xray .world .f,.xray .world .nbf,.xray .world .nbsheet,.xray .world .cvf,.xray .world .cvpaper,.xray .world .bb>svg,.xray .world .bb>.calp,.xray .world .scr,.xray .world .coaster{filter:grayscale(1) contrast(1.1) brightness(1.35) sepia(1) hue-rotate(170deg) saturate(2.4)}
+.xray .world .f.top,.xray .world .bb>svg{outline:1.5px dashed rgba(190,230,255,.75);outline-offset:4px}
+.xray .trc,.xray .pool,.xray .gs{opacity:.15}
+.xray .co .cl{background:#0A2A5E;color:#DDF3FF;border-color:#9BD8FF;text-transform:none;letter-spacing:0;white-space:normal;max-width:250px;line-height:1.35}
+.xray .co line{stroke:#9BD8FF;stroke-dasharray:4 4}
+.xray #wall{filter:grayscale(1) brightness(.8) sepia(1) hue-rotate(170deg) saturate(2)}
 /* Object animations */
 .hinge{position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;pointer-events:none;transform:translateZ(calc(var(--t) + 1px))}
 .nbcover,.nbsheet{position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;transform-origin:0 50%}
@@ -573,14 +600,16 @@ button{font:inherit;color:inherit}
 
           <span class="coaster" style="left:1200px;top:240px;width:120px;height:120px"></span>
 
-          <!-- Hardware security key (decor) -->
-          <span class="obj decor" aria-hidden="true" data-decor="1" data-order="9" style="--hl:#00E5FF;--t:5px;left:720px;top:650px;width:66px;height:24px;transform:rotateZ(24deg)">
+          <!-- Hardware security key: root access -->
+          <a class="obj" href="#content" role="button" data-key="security" data-act="root" data-order="8" data-lift="30" data-dx="-70" data-dy="44" data-zx="850" data-zy="314" data-zz="157" data-zw="600"
+             style="--hl:#00E5FF;--t:5px;left:720px;top:650px;width:66px;height:24px;transform:rotateZ(24deg)">
             <span class="gs" style="left:2px;top:4px;width:66px;height:24px;border-radius:8px"></span>
             <span class="drop"><span class="lift">
-              <span class="f top" style="border-radius:6px"><svg viewBox="0 0 66 24" width="66" height="24"><rect width="66" height="24" rx="6" fill="#0C0F1A"/><g fill="#E0B24A"><rect x="4" y="5" width="3" height="14" rx="1"/><rect x="9" y="5" width="3" height="14" rx="1"/><rect x="14" y="5" width="3" height="14" rx="1"/></g><circle cx="36" cy="12" r="5" style="fill:var(--cyan)"/><circle cx="56" cy="12" r="4.5" fill="none" stroke="#5A6588" stroke-width="2"/></svg></span>
+              <span class="f top" style="border-radius:6px"><svg viewBox="0 0 66 24" width="66" height="24"><rect width="66" height="24" rx="6" fill="#0C0F1A"/><g id="keyPad" fill="#E0B24A"><rect x="4" y="5" width="3" height="14" rx="1"/><rect x="9" y="5" width="3" height="14" rx="1"/><rect x="14" y="5" width="3" height="14" rx="1"/></g><circle id="keyLed" cx="36" cy="12" r="5" style="fill:var(--cyan)"/><circle cx="56" cy="12" r="4.5" fill="none" stroke="#5A6588" stroke-width="2"/></svg></span>
               <span class="f fr" style="background:#05070F"></span><span class="f rt" style="background:#05070F"></span><span class="f lt" style="background:#05070F"></span>
+              <i class="anc" style="left:33px;top:12px;transform:translateZ(6px)"></i>
             </span></span>
-          </span>
+          </a>
 
           <!-- Notebook: about -->
           <a class="obj" href="#about" role="button" data-key="about" data-order="0" data-lift="36" data-dx="-120" data-dy="-44" data-zx="350" data-zy="460" data-zz="20" data-zw="560" data-zt="42"
@@ -1056,6 +1085,8 @@ button{font:inherit;color:inherit}
   <button class="pBack" id="phClose" type="button"><span aria-hidden="true">←</span> <span data-t="back">Back to desk</span></button>
 </div>
 
+<div class="xbar" id="xbar" hidden><span class="xdot" aria-hidden="true"></span><span id="xbarTxt"></span><button type="button" id="xbarExit"></button></div>
+
 <div class="lapUI" id="lapUI" role="dialog" aria-label="Laptop" hidden>
   <div class="lbar"><i style="background:#FF3DCB"></i><i style="background:#FFC93D"></i><i style="background:#B6FF3B"></i>
     <div class="ltabs" role="tablist"><button class="ltab" role="tab" type="button" id="tabTerm" aria-selected="true" aria-controls="lvTerm">terminal</button><button class="ltab" role="tab" type="button" id="tabProj" aria-selected="false" aria-controls="lvProj">~/projects</button></div>
@@ -1155,7 +1186,7 @@ en: {
   contactTitle:'Contact', contact1:'Email is the quickest way to reach me. Write in English or Italian.',
   cEmail:'Email', cLinked:'LinkedIn', cGit:'GitHub', vEmail:'abubakarso2004@gmail.com', vLinked:'linkedin.com/in/abu-bakar-siddiq-', vGit:'github.com/abus1dd', open:'Open', copy:'Copy', copied:'Copied', copyFail:'Select and copy',
   cvTitle:'Curriculum vitae', cv1:'One PDF with education, internships, projects and certifications.', cvBtn:'Download CV (PDF)', cvNote:'PDF · in Italian',
-  phSub:'Tap an app. It opens in a new tab.', liteNote:'Light version: your browser is drawing this page without its graphics card, so the 3D desk is switched off to keep things smooth.', liteChoice:'Light version, as you chose.', liteBtn:'Show the 3D desk anyway', liteBack:'Light version', phUnlock:'Unlocking', funTitle:'Fun fact', factN:'Fact', nextFact:'Another fun fact', nbL1:'Cybersecurity · AI agents', cs1:'2025', cs2:'2026', cs3:'2026',
+  phSub:'Tap an app. It opens in a new tab.', o_security:'Security key', t_security:'How this site is secured', k_security:'Security key', secTitle:'How this site is secured', secIntro:'Plug the key into the laptop on the desk to get root access. Here is how the site and its AI assistant are protected.', xbar:'Blueprint mode: how each object is built and secured', xbarExit:'Exit blueprint',  liteNote:'Light version: your browser is drawing this page without its graphics card, so the 3D desk is switched off to keep things smooth.', liteChoice:'Light version, as you chose.', liteBtn:'Show the 3D desk anyway', liteBack:'Light version', phUnlock:'Unlocking', funTitle:'Fun fact', factN:'Fact', nextFact:'Another fun fact', nbL1:'Cybersecurity · AI agents', cs1:'2025', cs2:'2026', cs3:'2026',
   facts:['I grew up speaking Bengali, and now I work in Italian and English.','In 2023 I won “From Idea to Action”, a challenge run by The Doers.','During my internship I investigated an AI coding agent that had lost data, by tracing back through its own logs.','My Erasmus+ in Málaga was the first time I worked in English every day, in a multicultural team.','I play Apex Legends. Ask me who my main is.','I built an AI that fixes bugs on its own, but it always asks a human before merging.','I speak three languages and debug in a fourth: Python.','During my internship I helped set up Vaultwarden, a self-hosted password manager.'],
   lookTitle:'Currently looking for', look1:'Junior roles in penetration testing, security operations, security engineering or AI, in Emilia-Romagna. Open to remote work with international teams.',
   asTitle:'Ask the assistant', as1:'Ask anything about Abu’s background, skills or projects. Answers use only the facts on this site.', asPh:'Type a question', asSend:'Send', asThinking:'Thinking…',
@@ -1192,7 +1223,7 @@ it: {
   contactTitle:'Contatti', contact1:'L’email è il modo più rapido per contattarmi. Puoi scrivere in italiano o in inglese.',
   cEmail:'Email', cLinked:'LinkedIn', cGit:'GitHub', vEmail:'abubakarso2004@gmail.com', vLinked:'linkedin.com/in/abu-bakar-siddiq-', vGit:'github.com/abus1dd', open:'Apri', copy:'Copia', copied:'Copiato', copyFail:'Seleziona e copia',
   cvTitle:'Curriculum vitae', cv1:'Un unico PDF con formazione, stage, progetti e certificazioni.', cvBtn:'Scarica il CV (PDF)', cvNote:'PDF · in italiano',
-  phSub:'Tocca un’app. Si apre in una nuova scheda.', liteNote:'Versione leggera: il browser sta disegnando la pagina senza scheda grafica, quindi la scrivania 3D è disattivata per restare fluida.', liteChoice:'Versione leggera, come hai scelto.', liteBtn:'Mostra comunque la scrivania 3D', liteBack:'Versione leggera', phUnlock:'Sblocco', funTitle:'Curiosità', factN:'Curiosità', nextFact:'Un’altra curiosità', nbL1:'Cybersecurity · agenti AI',
+  phSub:'Tocca un’app. Si apre in una nuova scheda.', o_security:'Chiave di sicurezza', t_security:'Come è protetto questo sito', k_security:'Chiave di sicurezza', secTitle:'Come è protetto questo sito', secIntro:'Inserisci la chiave nel laptop sulla scrivania per ottenere l’accesso root. Ecco come sono protetti il sito e il suo assistente AI.', xbar:'Modalità blueprint: come è costruito e protetto ogni oggetto', xbarExit:'Esci dal blueprint',  liteNote:'Versione leggera: il browser sta disegnando la pagina senza scheda grafica, quindi la scrivania 3D è disattivata per restare fluida.', liteChoice:'Versione leggera, come hai scelto.', liteBtn:'Mostra comunque la scrivania 3D', liteBack:'Versione leggera', phUnlock:'Sblocco', funTitle:'Curiosità', factN:'Curiosità', nextFact:'Un’altra curiosità', nbL1:'Cybersecurity · agenti AI',
   facts:['Sono cresciuto parlando bengalese, e oggi lavoro in italiano e in inglese.','Nel 2023 ho vinto “From Idea to Action”, una sfida organizzata da The Doers.','Durante lo stage ho indagato su un agente AI di programmazione che aveva perso dei dati, ricostruendo tutto dai suoi log.','L’Erasmus+ a Málaga è stata la prima volta in cui ho lavorato ogni giorno in inglese, in un team multiculturale.','Gioco ad Apex Legends. Chiedimi qual è il mio main.','Ho creato un’AI che risolve i bug da sola, ma chiede sempre a una persona prima del merge.','Parlo tre lingue e faccio debug in una quarta: Python.','Durante lo stage ho aiutato a configurare Vaultwarden, un password manager self-hosted.'],
   lookTitle:'Sto cercando', look1:'Ruoli junior in penetration testing, security operations, security engineering o AI, in Emilia-Romagna. Disponibile anche da remoto con team internazionali.',
   asTitle:'Chiedi all’assistente', as1:'Fai una domanda sul percorso, sulle competenze o sui progetti di Abu. Le risposte usano solo le informazioni di questo sito.', asPh:'Scrivi una domanda', asSend:'Invia', asThinking:'Sto pensando…',
@@ -1329,11 +1360,12 @@ const B = {
   fun: () => { const f = t('facts'), n = f.length; return `<div class="fact"><p class="fnum" id="fnum">${esc(t('factN'))} ${factIdx + 1} / ${n}</p><p class="ftext" id="ftext" aria-live="polite">${esc(f[factIdx])}</p></div>
     <div class="factbar"><button class="btn" type="button" id="nextFact">${esc(t('nextFact'))}</button><span class="dots" aria-hidden="true">${f.map((_, i) => `<i class="${seenFacts.has(i) ? 'on' : ''}"></i>`).join('')}</span></div>`; },
   looking: () => `<p>${esc(t('look1'))}</p>`,
+  security: () => { const C = CASES[lang] || CASES.en, c = C.p1, H = C.h; return `<p>${esc(t('secIntro'))}</p><h3>${esc(H.site)}</h3><ul class="clist">${c.site.map((x) => `<li>${esc(x)}</li>`).join('')}</ul><h3>${esc(H.threat)}</h3><table class="cthreat"><thead><tr><th scope="col">${esc(H.risk)}</th><th scope="col">${esc(H.def)}</th></tr></thead><tbody>${c.threat.map(([r, d]) => `<tr><td>${esc(r)}</td><td>${esc(d)}</td></tr>`).join('')}</tbody></table>`; },
   assistant: () => `<p>${esc(t('as1'))}</p><div class="chat" id="chat" aria-live="polite"></div><div class="sugs" id="sugs">${t('sugs').map((s) => `<button class="sug" type="button">${esc(s)}</button>`).join('')}</div>
     <form class="ask" id="askForm"><label class="sr" for="askInput">${esc(t('asPh'))}</label><input id="askInput" autocomplete="off" placeholder="${esc(t('asPh'))}"><button class="btn" type="submit">${esc(t('asSend'))}</button></form><p class="note" id="asNote"></p>`
 };
 function videoTag() { return `<video controls playsinline muted preload="none" poster="${esc(LINKS.poster)}" width="1280" height="720"><source src="${esc(LINKS.video)}" type="video/mp4">${esc(t('vidFallback'))}</video>`; }
-const TITLES = { about:'aboutTitle', projects:'projectsTitle', contact:'contactTitle', cv:'cvTitle', fun:'funTitle', assistant:'asTitle', skills:'skillsTitle', journey:'journeyTitle', certs:'certsTitle', looking:'lookTitle' };
+const TITLES = { security:'secTitle', about:'aboutTitle', projects:'projectsTitle', contact:'contactTitle', cv:'cvTitle', fun:'funTitle', assistant:'asTitle', skills:'skillsTitle', journey:'journeyTitle', certs:'certsTitle', looking:'lookTitle' };
 
 function renderPlain() {
   $('#plainWrap').innerHTML = `
@@ -1357,6 +1389,7 @@ const MOBILE = [
   ['skills','#B6FF3B','<path d="M50 70C38 52 16 50 6 34C26 34 44 48 50 70Z" fill="#7FD13B"/><path d="M50 70C62 50 84 48 94 32C74 32 56 46 50 70Z" fill="#2BC4A8"/><path d="M50 70C42 46 36 26 40 6C52 22 56 46 50 70Z" fill="#B6FF3B"/><path d="M50 70C58 46 64 26 60 6C48 22 44 46 50 70Z" fill="#2BC4A8"/><rect x="30" y="68" width="40" height="7" rx="3" fill="#1E2647" stroke="#B6FF3B" stroke-width="1.5"/><path d="M33 75H67L63 94H37Z" fill="#141A34"/>'],
   ['journey','#00E5FF','<rect x="12" y="16" width="76" height="72" rx="6" fill="#DDEBF7"/><rect x="12" y="16" width="76" height="16" rx="6" fill="#0B1124"/><rect x="22" y="40" width="18" height="5" rx="2" fill="#00E5FF"/><rect x="44" y="40" width="34" height="5" rx="2" fill="#0B1124" opacity=".5"/><rect x="22" y="54" width="18" height="5" rx="2" fill="#00E5FF"/><rect x="44" y="54" width="30" height="5" rx="2" fill="#0B1124" opacity=".5"/><rect x="22" y="68" width="18" height="5" rx="2" fill="#FF3DCB"/><rect x="44" y="68" width="26" height="5" rx="2" fill="#0B1124" opacity=".5"/>'],
   ['certs','#FF3DCB','<g fill="#0B1124" stroke-width="2.5" stroke-linejoin="round"><path d="M18 14L28 8L38 14V26L28 32L18 26Z" stroke="#FF3DCB"/><path d="M42 14L52 8L62 14V26L52 32L42 26Z" stroke="#00E5FF"/><path d="M66 14L76 8L86 14V26L76 32L66 26Z" stroke="#B6FF3B"/></g><rect x="6" y="46" width="88" height="42" rx="7" fill="#151C38"/><rect x="12" y="52" width="76" height="24" rx="2" fill="#0A0F22" stroke="#00E5FF" stroke-width=".8"/><rect x="28" y="79" width="44" height="5" rx="2" fill="#0A0F22" stroke="#FF3DCB" stroke-width=".8"/>'],
+  ['security','#00E5FF','<g transform="rotate(-18 50 50)"><rect x="8" y="38" width="84" height="28" rx="8" fill="#0C0F1A" stroke="#00E5FF" stroke-width="2"/><g fill="#E0B24A"><rect x="14" y="44" width="4" height="16" rx="1"/><rect x="21" y="44" width="4" height="16" rx="1"/><rect x="28" y="44" width="4" height="16" rx="1"/></g><circle cx="54" cy="52" r="6" fill="#00E5FF"/><circle cx="78" cy="52" r="6" fill="none" stroke="#5A6588" stroke-width="2.5"/></g>'],
   ['looking','#C8FF3B','<g transform="rotate(5 50 50)"><rect x="14" y="14" width="72" height="72" rx="3" fill="#C8FF3B"/><rect x="24" y="30" width="46" height="5" rx="2.5" fill="#0B1124"/><rect x="24" y="44" width="52" height="5" rx="2.5" fill="#0B1124" opacity=".6"/><rect x="24" y="58" width="32" height="5" rx="2.5" fill="#0B1124" opacity=".6"/></g>']
 ];
 function renderMobile() {
@@ -1380,8 +1413,9 @@ function applyText() {
   objs.forEach((o) => {
     const name = o.act === 'theme' ? themeLabel() : o.act === 'lang' ? t('langTo') : t('o_' + o.key);
     o.el.setAttribute('aria-label', name);
-    if (o.label) o.label.textContent = o.idx + ' · ' + (o.act === 'theme' ? t('o_lamp') : o.act === 'lang' ? t('o_radio') : t('o_' + o.key));
+    if (o.label) o.label.textContent = o.idx + ' · ' + labelFor(o);
   });
+  if (typeof refreshLabels === 'function' && root.classList.contains('xray')) { refreshLabels(); $('#xbarTxt').textContent = t('xbar'); $('#xbarExit').textContent = t('xbarExit'); }
   if (openKey && !device) fillPanel(openKey, true);
   if (device === 'laptop') renderLapProj();
   if (device === 'phone') clock();
@@ -1522,6 +1556,7 @@ function activate(o) {
   if (introTl && introTl.isActive()) introTl.progress(1);
   if (o.act === 'theme') { if (fxOK()) { FX.lamp(); gsap.delayedCall(.22, toggleTheme); } else toggleTheme(o); return; }
   if (o.act === 'lang') { if (fxOK()) { FX.radio(); gsap.delayedCall(.5, toggleLang); } else toggleLang(o); return; }
+  if (o.act === 'root') { startRoot(o); return; }
   if (o.key === 'assistant' && hasGsap && !reduced && !openKey) {
     hideBubble();
     const f = bot.facing;
@@ -1876,7 +1911,8 @@ function showLaptop() {
     gsap.fromTo(lapUI, { opacity: 0 }, { opacity: 1, duration: reduced ? .2 : .35, ease: 'power2.out' });
     if (!reduced) gsap.fromTo('#lvTerm, #lvProj', { filter: 'brightness(2.2)' }, { filter: 'brightness(1)', duration: .5, clearProps: 'filter' });
     $('#tcmd').focus({ preventScroll: true });
-    if (!term.started) { term.started = true; intro(); }
+    if (term.rootPending) { term.rootPending = false; term.started = true; selectTab('term', true); rootVerify(); }
+    else if (!term.started) { term.started = true; intro(); }
   };
   devCall = gsap.delayedCall(reduced ? .55 : 1.35, go);
   function intro() {
@@ -1901,23 +1937,26 @@ function flashKey() {
 }
 const pbtn = (n, label) => `<button type="button" data-open-p="${n}">${esc(label)}</button>`;
 function tprint(html) { const d = document.createElement('div'); d.innerHTML = html; $('#tout').append(d); const v = $('#lvTerm'); v.scrollTop = v.scrollHeight; }
-function runCmd(raw, auto) {
+function runCmd(raw, auto, quiet) {
   const cmd = raw.trim();
-  tprint(`<span class="c">abu@desk:~$</span> ${esc(cmd)}`);
+  if (!quiet) tprint(`<span class="c">${ROOT ? 'root@desk:~#' : 'abu@desk:~$'}</span> ${esc(cmd)}`);
   if (!cmd) return;
   if (!auto) { term.hist.push(cmd); term.hi = term.hist.length; }
   const parts = cmd.split(/\s+/), c = parts[0].toLowerCase(), arg = parts.slice(1).join(' ').toLowerCase();
   const L = (a) => `<a href="${esc(a[1])}" target="_blank" rel="noopener">${esc(a[0])}</a>`;
   switch (c) {
     case 'help':
+      if (ROOT) tprint(`<span class="m">root</span>\n  sudo whoami      ${esc(TT('who you are now', 'chi sei adesso'))}\n  cat secrets.txt  ${esc(TT('the secrets file', 'il file dei segreti'))}\n  security-report  ${esc(TT('how this site is secured', 'come è protetto il sito'))}\n  xray             ${esc(TT('blueprint mode for the desk', 'modalità blueprint della scrivania'))}\n  logout           ${esc(TT('leave root and unplug the key', 'esci da root e scollega la chiave'))}`);
       tprint(`<span class="m">${esc(TT('Commands', 'Comandi'))}</span>\n  whoami      ${esc(TT('who I am', 'chi sono'))}\n  ls          ${esc(TT('list files', 'elenca i file'))}\n  projects    ${esc(TT('show my projects', 'mostra i progetti'))}\n  open 1 | 2  ${esc(TT('open a project', 'apri un progetto'))}\n  cat case-study  ${esc(TT('the AI workflow case study', 'il caso di studio del workflow AI'))}\n  skills      ${esc(TT('what I work with', 'con cosa lavoro'))}\n  status      ${esc(TT('what I am looking for', 'cosa sto cercando'))}\n  contact     ${esc(TT('how to reach me', 'come contattarmi'))}\n  clear       ${esc(TT('clear the screen', 'pulisci lo schermo'))}\n  exit        ${esc(TT('back to the desk', 'torna alla scrivania'))}`); break;
     case 'whoami':
+      if (ROOT) { tprint(esc(TT('root. Well, actually: Abu Bakar Siddiq, junior security engineer, now with root on his own desk. Use it wisely.', 'root. Anzi: Abu Bakar Siddiq, junior security engineer, ora con i permessi di root sulla sua scrivania. Usali con saggezza.'))); break; }
       tprint(esc(TT('Abu Bakar Siddiq · System Cybersecurity Specialist (ITS Academy Olivetti, 2026). I build AI agents. Vignola, Modena.', 'Abu Bakar Siddiq · Specialista in Cybersecurity di sistema (ITS Academy Olivetti, 2026). Sviluppo agenti AI. Vignola, Modena.'))); break;
     case 'ls': case 'dir':
       if (arg.startsWith('projects')) tprint(`${pbtn(1, 'portfolio/')}   ${pbtn(2, 'ai-issue-resolver/')}  <span class="m">(private)</span>`);
-      else tprint(`<button type="button" data-cmd="projects">projects/</button>   <button type="button" data-cmd="cat about.txt">about.txt</button>   <button type="button" data-cmd="skills">skills.txt</button>   <button type="button" data-cmd="contact">contact.txt</button>   <button type="button" data-cmd="cat case-study">case-study.md</button>`);
+      else tprint(`<button type="button" data-cmd="projects">projects/</button>   <button type="button" data-cmd="cat about.txt">about.txt</button>   <button type="button" data-cmd="skills">skills.txt</button>   <button type="button" data-cmd="contact">contact.txt</button>   <button type="button" data-cmd="cat case-study">case-study.md</button>${ROOT ? '   <button type="button" data-cmd="cat secrets.txt">secrets.txt</button>' : ''}`);
       break;
     case 'cat': case 'about':
+      if (/secret/.test(arg)) { if (ROOT) tprint(`<span class="ok">secrets.txt</span>\n${esc(TT('There are no secrets on a public website. That is the point. 😉\nReal secrets belong in a vault: I have set one up (Vaultwarden).', 'Su un sito pubblico non ci sono segreti. È proprio questo il punto. 😉\nI veri segreti stanno in una cassaforte: ne ho configurata una (Vaultwarden).'))}`); else tprint(`<span class="e">cat: secrets.txt: ${esc(TT('Permission denied', 'Permesso negato'))}</span> <span class="m">${esc(TT("(root only: try 'sudo -i')", "(solo root: prova 'sudo -i')"))}</span>`); break; }
       if (/case/.test(arg)) { const c2 = (CASES[lang] || CASES.en).p2, H = (CASES[lang] || CASES.en).h; tprint(`<span class="c">${esc(t('p2n'))}</span>\n\n<span class="m">${esc(H.problem)}</span>\n${esc(c2.problem)}\n\n<span class="m">${esc(H.how)}</span>\n${c2.how.map(([a, b], i) => `  ${i + 1}. ${esc(a)}: ${esc(b)}`).join('\n')}\n\n<span class="m">${esc(H.sec)}</span>\n${c2.sec.map((x) => '  · ' + esc(x)).join('\n')}\n\n<span class="m">${esc(H.res)}</span>\n${c2.stats.map(([v, l]) => '  ' + esc(v) + '  ' + esc(l)).join('\n')}\n\n<span class="m">${esc(H.lim)}</span>\n${esc(c2.lim)}`); }
       else if (c === 'about' || /about/.test(arg)) tprint(esc(t('about1')) + '\n' + esc(t('about2')));
       else if (/skill/.test(arg)) runSkills();
@@ -1935,9 +1974,25 @@ function runCmd(raw, auto) {
     case 'status': tprint(`<span class="c">●</span> ${esc(t('lk_k'))} · ${esc(t('lk_s1'))} · ${esc(t('lk_s2'))}`); break;
     case 'date': tprint(esc(new Date().toLocaleString(lang))); break;
     case 'echo': tprint(esc(parts.slice(1).join(' '))); break;
-    case 'sudo': case 'rm': case 'su': tprint(`<span class="e">${esc(TT('Permission denied. Nice try: this incident will be reported.', 'Permesso negato. Bel tentativo: l’incidente verrà segnalato.'))}</span>`); break;
+    case 'sudo': case 'su':
+      if (c === 'su' || /^-i|^-s|^su\b|^bash/.test(arg)) { if (ROOT) tprint(`<span class="ok">${esc(TT('Already root.', 'Sei già root.'))}</span>`); else if (keyPlugged) rootVerify(true); else tprint(`<span class="e">${esc(TT('No security key detected.', 'Nessuna chiave di sicurezza rilevata.'))}</span> <span class="m">${esc(TT('Hint: there is one on the desk, just below this laptop.', 'Suggerimento: ce n’è una sulla scrivania, proprio sotto questo laptop.'))}</span>`); break; }
+      if (ROOT && /^whoami/.test(arg)) { runCmd('whoami', true, true); break; }
+      if (ROOT && /^cat/.test(arg)) { runCmd(arg, true, true); break; }
+      // falls through
+    case 'rm': if (ROOT && c === 'rm') { tprint(`<span class="e">${esc(TT('Even root does not delete things on this desk. Defence in depth.', 'Nemmeno root cancella le cose su questa scrivania. Difesa in profondità.'))}</span>`); break; } tprint(`<span class="e">${esc(TT('Permission denied. Nice try: this incident will be reported.', 'Permesso negato. Bel tentativo: l’incidente verrà segnalato.'))}</span>`); break;
+    case 'security-report': case 'security': {
+      const C = CASES[lang] || CASES.en, c1 = C.p1, H = C.h;
+      tprint(`<span class="c">${esc(H.site)}</span>\n${c1.site.map((x) => '  · ' + esc(x)).join('\n')}\n\n<span class="c">${esc(H.threat)}</span>\n${c1.threat.map(([r, d]) => '  ' + esc(r) + '\n    → ' + esc(d)).join('\n')}`);
+      break;
+    }
+    case 'xray': case 'blueprint':
+      if (!ROOT) { tprint(`<span class="e">xray: ${esc(TT('Permission denied', 'Permesso negato'))}</span> <span class="m">${esc(TT("(root only: try 'sudo -i')", "(solo root: prova 'sudo -i')"))}</span>`); break; }
+      tprint(`<span class="ok">${esc(TT('Switching the desk to blueprint mode…', 'Passo la scrivania in modalità blueprint…'))}</span>`);
+      setTimeout(() => { closePanel(); setTimeout(() => setXray(true), reduced ? 50 : 900); }, reduced ? 50 : 500);
+      break;
     case 'clear': case 'cls': $('#tout').innerHTML = ''; break;
-    case 'exit': case 'logout': closePanel(); break;
+    case 'logout': if (ROOT) { endRoot(); break; } closePanel(); break;
+    case 'exit': closePanel(); break;
     default: tprint(`<span class="e">${esc(TT('command not found', 'comando non trovato'))}: ${esc(parts[0])}</span> <span class="m">· ${esc(TT("try 'help'", "prova 'help'"))}</span>`);
   }
   function runSkills() { tprint([['sg1', 's1'], ['sg2', 's2'], ['sg3', 's3']].map(([g, k]) => `<span class="c">${esc(t(g))}</span>\n  ${esc(t(k).join(' · '))}`).join('\n')); }
@@ -1968,6 +2023,7 @@ function showProject(n) {
 $('#tabTerm').addEventListener('click', () => selectTab('term'));
 $('#tabProj').addEventListener('click', () => { selectTab('proj'); showProject(lapView); });
 lapUI.addEventListener('click', (e) => {
+  const tk = e.target.closest('[data-touch]'); if (tk) { rootSuccess(tk.dataset.touch); return; }
   const p = e.target.closest('[data-open-p]'); if (p) { selectTab('proj'); showProject(+p.dataset.openP); return; }
   const c = e.target.closest('[data-cmd]'); if (c) { runCmd(c.dataset.cmd); $('#tcmd').focus({ preventScroll: true }); return; }
   if (e.target.closest('#lvTerm') && !e.target.closest('a, button') && !getSelection().toString()) $('#tcmd').focus({ preventScroll: true });
@@ -1979,6 +2035,102 @@ $('#tcmd').addEventListener('keydown', (e) => {
   else if (e.key === 'ArrowDown' && term.hist.length) { e.preventDefault(); term.hi = Math.min(term.hist.length, term.hi + 1); e.target.value = term.hist[term.hi] || ''; }
   else if (e.key.length === 1) flashKey();
 });
+
+/* ---------- Root access (security key) ---------- */
+let ROOT = false, keyPlugged = false;
+const XRAY = {
+  en: { about: 'Notebook · CSS 3D cover hinge, GSAP flip, fully reversible', projects: 'Laptop · live terminal and project tabs, keyboard accessible', contact: 'Phone · links open in a new tab with rel="noopener"', cv: 'CV folder · PDF served from this site only (CSP: self)', fun: 'Mug · shuffled facts, never the same twice', radio: 'Radio · EN/IT saved locally, no cookies', assistant: 'Robot · Cloudflare Worker · origin allowlist · 6 req/min · fallback answers', lamp: 'Lamp · theme saved locally, no cookies', security: 'Security key · you are root. Click it to leave blueprint mode', skills: 'Plant · skill tags, reduced-motion safe', journey: 'Calendar · 3D page flips, plain-text version below', certs: 'Keyboard · Credly-verifiable badges, image lazy-loaded' },
+  it: { about: 'Taccuino · cerniera 3D in CSS, sfoglio GSAP, reversibile', projects: 'Laptop · terminale vero e schede progetti, accessibile da tastiera', contact: 'Telefono · link in una nuova scheda con rel="noopener"', cv: 'Cartella CV · PDF servito solo da questo sito (CSP: self)', fun: 'Tazza · curiosità mescolate, mai la stessa due volte', radio: 'Radio · EN/IT salvato in locale, nessun cookie', assistant: 'Robot · Cloudflare Worker · origini consentite · 6 richieste/min · risposte di riserva', lamp: 'Lampada · tema salvato in locale, nessun cookie', security: 'Chiave di sicurezza · sei root. Cliccala per uscire dal blueprint', skills: 'Pianta · competenze, sicura con movimento ridotto', journey: 'Calendario · pagine 3D, versione testuale sotto', certs: 'Tastiera · badge verificabili su Credly, immagine caricata al bisogno' }
+};
+function keyObj() { return objs.find((x) => x.key === 'security'); }
+function plugKey(instant) {
+  const k = keyObj(); if (!k || keyPlugged) return gsap.timeline();
+  keyPlugged = true;
+  if (instant || reduced) { gsap.set(k.el, { x: -128, y: -184, rotation: 0 }); gsap.set('#keyLed', { fill: '#E0B24A' }); coDirty = 4; return gsap.timeline(); }
+  return gsap.timeline({ onUpdate: () => { coDirty = 2; } })
+    .to(k.dropEl, { z: 60, duration: .35, ease: 'power2.out' }, 0)
+    .to(k.el, { x: -110, y: -184, rotation: 0, duration: .7, ease: 'power3.inOut' }, .1)
+    .to(k.el, { x: -128, duration: .18, ease: 'power2.in' }, .8)
+    .to(k.dropEl, { z: 6, duration: .3, ease: 'power2.in' }, .65)
+    .to('#keyLed', { fill: '#E0B24A', duration: .1 }, .95)
+    .to(k.liftEl, { rotationZ: 3, duration: .05, yoyo: true, repeat: 3 }, .98);
+}
+function unplugKey() {
+  const k = keyObj(); if (!k || !keyPlugged) return;
+  keyPlugged = false;
+  gsap.killTweensOf('#keyLed');
+  const d = reduced ? 0 : 1;
+  gsap.timeline({ onUpdate: () => { coDirty = 2; } })
+    .to(k.el, { x: -110, duration: .2 * d }, 0)
+    .to(k.dropEl, { z: 50, duration: .3 * d, ease: 'power2.out' }, .1 * d)
+    .to(k.el, { x: 0, y: 0, rotation: 24, duration: .7 * d, ease: 'power3.inOut' }, .25 * d)
+    .to(k.dropEl, { z: 0, duration: .3 * d, ease: 'power2.in' }, .8 * d)
+    .set('#keyLed', { fill: '#00E5FF' });
+}
+function startRoot(o) {
+  if (root.classList.contains('xray')) { setXray(false); return; }
+  if (isStack() || !hasGsap) { openPanel('security', o); return; }
+  const lap = objs.find((x) => x.key === 'projects');
+  term.rootPending = !ROOT;
+  hoverOff(o);
+  if (keyPlugged) { openDevice('laptop', 'projects', lap); return; }
+  const tl = plugKey();
+  gsap.delayedCall(reduced ? 0 : 1.15, () => openDevice('laptop', 'projects', lap));
+  return tl;
+}
+const KEYSVG = '<svg width="58" height="22" viewBox="0 0 66 24" aria-hidden="true"><rect width="66" height="24" rx="6" fill="#0C0F1A" stroke="#E0B24A"/><g class="pad" fill="#E0B24A"><rect x="4" y="5" width="3" height="14" rx="1"/><rect x="9" y="5" width="3" height="14" rx="1"/><rect x="14" y="5" width="3" height="14" rx="1"/></g><circle cx="36" cy="12" r="5" fill="#E0B24A"/><circle cx="56" cy="12" r="4.5" fill="none" stroke="#5A6588" stroke-width="2"/></svg>';
+function rootVerify(typed) {
+  clearTimeout(term.rootT);
+  if (!typed) tprint(`<span class="c">abu@desk:~$</span> sudo -i`);
+  tprint(`<span class="m">[sudo] ${esc(TT('security key detected on USB. Touch it to confirm it is you.', 'chiave di sicurezza rilevata su USB. Toccala per confermare che sei tu.'))}</span>`);
+  const id = 'tk' + Date.now();
+  tprint(`<div class="tkey" id="${id}"><button type="button" class="tkbtn" data-touch="${id}">${KEYSVG}<span>${esc(TT('Touch your security key', 'Tocca la tua chiave di sicurezza'))}</span></button><span class="tkbar"><i></i></span></div>`);
+  if (hasGsap && !reduced) gsap.to('#keyLed', { opacity: .3, duration: .35, yoyo: true, repeat: -1 });
+  const btn = document.querySelector(`[data-touch="${id}"]`); if (btn) btn.focus({ preventScroll: true });
+  term.rootT = setTimeout(() => {
+    const box = document.getElementById(id); if (!box || box.classList.contains('done')) return;
+    box.classList.add('fail'); const b = box.querySelector('button'); if (b) b.disabled = true;
+    gsap.killTweensOf('#keyLed'); gsap.set('#keyLed', { opacity: 1 });
+    tprint(`<span class="e">sudo: ${esc(TT('verification timed out (no touch detected).', 'verifica scaduta (nessun tocco rilevato).'))}</span> <button type="button" data-cmd="sudo -i">${esc(TT('try again', 'riprova'))}</button>`);
+  }, 8000);
+}
+function rootSuccess(id) {
+  const box = document.getElementById(id); if (!box || box.classList.contains('done') || box.classList.contains('fail')) return;
+  clearTimeout(term.rootT);
+  box.classList.add('done'); const b = box.querySelector('button'); if (b) b.disabled = true;
+  gsap.killTweensOf('#keyLed'); gsap.set('#keyLed', { opacity: 1, fill: '#B6FF3B' });
+  ROOT = true;
+  const lines = [
+    `<span class="ok">✓</span> ${esc(TT('touch detected · FIDO2 assertion verified', 'tocco rilevato · asserzione FIDO2 verificata'))}`,
+    `<span class="ok">✓</span> ${esc(TT('privileges elevated · session: root', 'privilegi elevati · sessione: root'))}`,
+    `${esc(TT('Welcome, root. New commands:', 'Benvenuto, root. Nuovi comandi:'))} <button type="button" data-cmd="sudo whoami">sudo whoami</button> · <button type="button" data-cmd="cat secrets.txt">cat secrets.txt</button> · <button type="button" data-cmd="security-report">security-report</button> · <button type="button" data-cmd="xray">xray</button> · <button type="button" data-cmd="logout">logout</button>`
+  ];
+  lines.forEach((l, i) => setTimeout(() => tprint(l), reduced ? 0 : 220 * (i + 1)));
+  setTimeout(() => { const tp = $('.tp'); tp.textContent = 'root@desk:~#'; tp.classList.add('root'); $('#tcmd').focus({ preventScroll: true }); }, reduced ? 0 : 700);
+}
+function endRoot() {
+  ROOT = false; clearTimeout(term.rootT);
+  const tp = $('.tp'); tp.textContent = 'abu@desk:~$'; tp.classList.remove('root');
+  tprint(`<span class="m">${esc(TT('Session closed. Security key removed.', 'Sessione chiusa. Chiave di sicurezza rimossa.'))}</span>`);
+  setXray(false); unplugKey();
+}
+function labelFor(o) { return o.act === 'theme' ? t('o_lamp') : o.act === 'lang' ? t('o_radio') : t('o_' + o.key); }
+function refreshLabels() {
+  const x = root.classList.contains('xray'), X = XRAY[lang] || XRAY.en;
+  objs.forEach((o) => { if (o.label) o.label.textContent = x && X[o.key] ? X[o.key] : o.idx + ' · ' + labelFor(o); });
+  coDirty = 6;
+}
+function setXray(on) {
+  if (on === root.classList.contains('xray')) return;
+  root.classList.toggle('xray', on);
+  const bar = $('#xbar'); $('#xbarTxt').textContent = t('xbar'); $('#xbarExit').textContent = t('xbarExit');
+  bar.hidden = !on;
+  if (on && hasGsap && !reduced) gsap.fromTo(bar, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .45, ease: 'back.out(1.6)' });
+  refreshLabels();
+  if (on) $('#xbarExit').focus({ preventScroll: true });
+}
+$('#xbarExit').addEventListener('click', () => setXray(false));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !openKey && root.classList.contains('xray')) setXray(false); });
 
 /* ---------- Zoom ---------- */
 function zoomTo(o, center) {

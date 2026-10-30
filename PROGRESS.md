@@ -31,6 +31,7 @@ A single-page site built from `src/desk.html` (HTML, CSS, SVG, GSAP 3.12.5 + Scr
 | Calendar (scroll) | Journey | Month pages flip, timeline lights up |
 | Keyboard (scroll) | Certifications | Key wave, dragon hologram, four Cisco badges with Credly links |
 | Sticky note (wall) | Currently looking for | Pin pops, note flutters |
+| Security key (under the laptop) | How this site is secured | Plugs into the laptop, "touch to verify" (8 s timeout), root terminal: `sudo whoami`, `cat secrets.txt`, `security-report`, `xray` (blueprint mode: every object turns blue with a note on how it is built and secured), `logout`. Mobile and light mode open the security panel |
 
 Mobile shows the objects as a stacked list; reduced-motion users get fades instead of zooms; a plain-text version of every section sits below the desk; a `<noscript>` block covers browsers without JavaScript.
 

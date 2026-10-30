@@ -20,6 +20,7 @@ The site is an interactive top-down desk: every object is a section, and clickin
 | Robot | AI assistant that answers questions about Abu |
 | Lamp / radio | Day-night theme / English-Italian |
 | Plant, calendar, keyboard | Skills, journey, certifications (revealed by scrolling) |
+| Security key | Root access: plug it into the laptop, touch to verify, then `security-report` or `xray` (blueprint mode) |
 
 Recruiters in a hurry get a plain menu, a skip link and a text version of every section. Phones get a card layout, and browsers without graphics acceleration get a light version automatically.
 
