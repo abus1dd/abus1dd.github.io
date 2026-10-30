@@ -230,6 +230,10 @@ button{font:inherit;color:inherit}
 .lmedia video{display:block;width:100%;height:100%;object-fit:cover}
 .lmedia small{position:absolute;left:7px;bottom:6px;color:#9FB4DA;font-size:8px}
 .lplay{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.16)}
+.lstats{list-style:none;margin:8px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+.lstats li{display:flex;flex-direction:column;gap:2px;padding:6px 7px;border-radius:5px;background:#0E1838;border:1px solid rgba(0,229,255,.2)}
+.lstats b{font:700 13px/1 var(--f-disp);color:#00E5FF}
+.lstats span{font-size:8px;line-height:1.3;color:#9FB4DA}
 .ldet p{margin:6px 0;color:#C9D9F0;font:400 10px/1.45 var(--f-body)}
 .lsteps{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0;padding:0;list-style:none}
 .lsteps li{padding:2px 6px;border-radius:8px;background:#16224A;font-size:8.5px}
@@ -341,6 +345,34 @@ button{font:inherit;color:inherit}
 .video{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:10px;overflow:hidden;background:linear-gradient(160deg,#14204A,#070B19);display:flex;align-items:center;justify-content:center}
 .video .play{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center}
 .video small{position:absolute;left:10px;bottom:10px;padding:5px 9px;border-radius:6px;background:rgba(5,9,20,.8);color:#E8F8FF;font:500 11px/1 var(--f-mono)}
+.case{margin-top:4px;border-top:1px solid var(--line);padding-top:12px}
+.case>summary{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid var(--cyan);color:var(--cyan);font:600 13px/1 var(--f-body);cursor:pointer;list-style:none}
+.case>summary::-webkit-details-marker{display:none}
+.case>summary::after{content:'';width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.case[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+.case>summary .c,.case[open]>summary .o{display:none}
+.case[open]>summary .c{display:inline}
+.cbody{display:flex;flex-direction:column;gap:18px;margin-top:16px}
+.csec h4{margin:0 0 8px;font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.csec p{margin:0;font-size:15px;line-height:1.55}
+.csteps{counter-reset:s;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.csteps li{counter-increment:s;position:relative;display:flex;flex-direction:column;gap:3px;padding:0 0 14px 40px}
+.csteps li::before{content:counter(s);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--cyan) 18%,transparent);border:1.5px solid var(--cyan);color:var(--cyan);font:600 12px/1 var(--f-mono)}
+.csteps li:not(:last-child)::after{content:'';position:absolute;left:13px;top:28px;bottom:2px;width:1.5px;background:color-mix(in srgb,var(--cyan) 40%,transparent)}
+.csteps b{font:600 15px/1.3 var(--f-body)}
+.csteps span{font-size:14px;line-height:1.5;color:var(--muted)}
+.clist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.clist li{position:relative;padding-left:20px;font-size:14px;line-height:1.5}
+.clist li::before{content:'';position:absolute;left:2px;top:7px;width:8px;height:8px;border-radius:2px;background:var(--lime);transform:rotate(45deg)}
+.day .clist li::before{background:var(--cyan)}
+.cstats{list-style:none;margin:0 0 8px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cstats li{display:flex;flex-direction:column;gap:4px;padding:12px;border-radius:12px;background:var(--card2);min-width:0}
+.cstats b{font:700 22px/1 var(--f-disp);color:var(--cyan)}
+.cstats span{font-size:12.5px;line-height:1.35;color:var(--muted)}
+.cthreat{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.45}
+.cthreat th{text-align:left;padding:6px 8px;font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.cthreat td{vertical-align:top;padding:8px;border-bottom:1px solid var(--line)}
+.cthreat td:first-child{font-weight:600;width:40%}
 .steps{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
 .steps li{display:flex;align-items:center;gap:6px;font:500 12px/1 var(--f-mono);padding:7px 9px;border-radius:6px;background:var(--card2)}
 .steps li+li::before{content:'→';color:var(--muted);margin-right:2px}
@@ -1119,7 +1151,7 @@ en: {
   projectsTitle:'Projects',
   p1n:'Personal Portfolio', p1b:'Public on GitHub', p1x:'This site: an interactive desk built with HTML, CSS and JavaScript, with a plain version for quick reading.', p1l:'View on GitHub', shotAlt:'Screenshot of the interactive desk portfolio',
   p2n:'AI Issue-Resolution Workflow', p2b1:'Private repository', p2b2:'In production', p2x:'An AI agent clones a project into an isolated Docker sandbox, fixes the issue, runs the tests and opens a merge request for human review.',
-  p2s:['Clone','Docker sandbox','Fix','Run tests','Merge request','Human review'], p2v:'Conceptual animation · 37 s · illustrative data, no real code or company information', vidFallback:'Your browser can’t play this video. It shows an AI agent claiming a GitLab issue, fixing it in a sandbox, and opening a merge request for human review.', p2p:'The code is private, so no source is shown here.',
+  p2s:['Clone','Docker sandbox','Fix','Run tests','Merge request','Human review'], p2v:'Conceptual animation · 37 s · illustrative data, no real code or company information', vidFallback:'Your browser can’t play this video. It shows an AI agent claiming a GitLab issue, fixing it in a sandbox, and opening a merge request for human review.', p2p:'The code is private, so no source is shown here. More details are available on request.',
   contactTitle:'Contact', contact1:'Email is the quickest way to reach me. Write in English or Italian.',
   cEmail:'Email', cLinked:'LinkedIn', cGit:'GitHub', vEmail:'abubakarso2004@gmail.com', vLinked:'linkedin.com/in/abu-bakar-siddiq-', vGit:'github.com/abus1dd', open:'Open', copy:'Copy', copied:'Copied', copyFail:'Select and copy',
   cvTitle:'Curriculum vitae', cv1:'One PDF with education, internships, projects and certifications.', cvBtn:'Download CV (PDF)', cvNote:'PDF · English',
@@ -1156,7 +1188,7 @@ it: {
   projectsTitle:'Progetti',
   p1n:'Portfolio personale', p1b:'Pubblico su GitHub', p1x:'Questo sito: una scrivania interattiva realizzata in HTML, CSS e JavaScript, con una versione semplice per una lettura veloce.', p1l:'Vedi su GitHub', shotAlt:'Schermata del portfolio a scrivania interattiva',
   p2n:'Workflow AI per la risoluzione delle issue', p2b1:'Repository privato', p2b2:'In produzione', p2x:'Un agente AI clona il progetto in una sandbox Docker isolata, risolve la issue, esegue i test e apre una merge request per la revisione umana.',
-  p2s:['Clone','Sandbox Docker','Fix','Test','Merge request','Revisione umana'], p2v:'Animazione concettuale · 37 s · dati illustrativi, nessun codice o dato aziendale reale', vidFallback:'Il tuo browser non riesce a riprodurre questo video. Mostra un agente AI che prende in carico una issue GitLab, la risolve in una sandbox e apre una merge request per la revisione umana.', p2p:'Il codice è privato, quindi qui non viene mostrato.',
+  p2s:['Clone','Sandbox Docker','Fix','Test','Merge request','Revisione umana'], p2v:'Animazione concettuale · 37 s · dati illustrativi, nessun codice o dato aziendale reale', vidFallback:'Il tuo browser non riesce a riprodurre questo video. Mostra un agente AI che prende in carico una issue GitLab, la risolve in una sandbox e apre una merge request per la revisione umana.', p2p:'Il codice è privato, quindi qui non viene mostrato. Altri dettagli sono disponibili su richiesta.',
   contactTitle:'Contatti', contact1:'L’email è il modo più rapido per contattarmi. Puoi scrivere in italiano o in inglese.',
   cEmail:'Email', cLinked:'LinkedIn', cGit:'GitHub', vEmail:'abubakarso2004@gmail.com', vLinked:'linkedin.com/in/abu-bakar-siddiq-', vGit:'github.com/abus1dd', open:'Apri', copy:'Copia', copied:'Copiato', copyFail:'Seleziona e copia',
   cvTitle:'Curriculum vitae', cv1:'Un unico PDF con formazione, stage, progetti e certificazioni.', cvBtn:'Scarica il CV (PDF)', cvNote:'PDF · in inglese',
@@ -1184,6 +1216,100 @@ function pickFact() {
 }
 function gsapShuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
+/* ---------- Project case studies (EN / IT) ---------- */
+const CASES = {
+  en: {
+    open: 'Read the case study', close: 'Hide the case study',
+    h: { problem: 'The problem', role: 'My role', how: 'How it works', sec: 'Security by design', res: 'Results', lim: 'Honest limits', stack: 'Stack', site: 'How this site is secured', threat: 'Assistant threat model', risk: 'Risk', def: 'Defence' },
+    p2: {
+      problem: 'In a small software company, much of the developers’ time goes into repetitive, well-specified fixes: time taken away from specialist work. The goal was to hand those fixes to an AI agent safely, with every change tested and reviewed by a person.',
+      role: 'I designed and built it alone during my internship at Nabla2 (April–July 2026): the pipeline, the security limits and the benchmark tests.',
+      how: [
+        ['Label and claim', 'A developer tags a GitLab issue (ai-fix, ai-feature, ai-refactor or ai-task). An AI triage step filters out issues that are unsuitable or too costly, then locks the issue so two runs can never work on it at once.'],
+        ['Disposable sandbox', 'The repository is cloned into a throwaway Docker container with no network access.'],
+        ['Agent loop', 'An agent (mini-swe-agent with Kimi / Moonshot models) reads the code and proposes changes, iterating until it has a fix.'],
+        ['Verify', 'A mandatory gate: every test must pass. New behaviour is tested fail-first: the test fails before the fix and passes after it.'],
+        ['Ship and report', 'Only then does it create a branch, push, open a merge request and post the outcome on the issue. A person reviews and merges.']
+      ],
+      sec: ['Offline sandbox: the agent’s container has no internet access.', 'Token containment: the access token is removed from the git remote at the end of every run.', 'Protected paths: files and folders the agent can never modify.', 'Cost caps: at most $1 per issue and $10 per day.', 'Mandatory human review: nothing reaches the main branch without a person’s approval.'],
+      stats: [['84%', 'issues completed (21 of 25)'], ['72%', 'solved on the first attempt'], ['$0.78', 'average cost per issue'], ['9 / 10', 'SWE-bench instances (20 / 30 on the larger sample)']],
+      statsNote: 'Internal trial: 25 issues in 11 days, 86 attempts in total. SWE-bench is a benchmark built from real issues in open-source projects, checked by their own regression tests.',
+      lim: 'The internal test issues were AI-generated at mixed difficulty, so those results are indicative, and the SWE-bench sample is too small to be statistically significant. The pipeline works best on well-specified, contained tasks and depends on existing test coverage. It reduces repetitive work; it does not replace a developer.',
+      stack: ['Python', 'Docker', 'GitLab API', 'mini-swe-agent', 'Kimi / Moonshot', 'Local-model option']
+    },
+    p1: {
+      problem: 'My previous portfolio was a standard one-page site. I wanted something recruiters remember, without making the facts harder to find.',
+      role: 'The concept, content and decisions are mine. I built it with an AI coding assistant (Claude), directing it and reviewing, testing and deploying every change.',
+      how: [
+        ['A desk you explore', 'Every object is a section, in a 3D scene made with plain HTML, CSS and SVG (no WebGL), animated with GSAP.'],
+        ['Fast for recruiters', 'A plain menu, a skip link and a text version of every section, for people who just want the facts.'],
+        ['For everyone', 'English and Italian, light and dark themes, keyboard navigation, reduced motion, and a light version for devices without graphics acceleration.']
+      ],
+      site: ['Content Security Policy: the browser only runs this site’s own scripts (the inline one is allowed by its hash) and the analytics script, and only connects to the assistant and analytics.', 'Self-hosted libraries: no code loaded from third-party CDNs.', 'Privacy: cookie-free analytics, and no visitor data stored.'],
+      threat: [
+        ['Other websites using the assistant', 'Origin allowlist: only this site gets an answer.'],
+        ['Spam and cost', 'Per-visitor rate limit, and the free daily allowance acts as a hard cap with no billing.'],
+        ['Prompt injection (“ignore your instructions”)', 'Facts and rules live on the server; fake system messages are dropped; off-topic and rule-change requests are refused and tested.'],
+        ['Data leaks', 'The model only sees public facts about me; questions are not stored.'],
+        ['Outage', 'Automatic fallback to scripted answers, so the chat never breaks.']
+      ],
+      stats: [['99', 'Lighthouse performance (desktop)'], ['100', 'accessibility'], ['100', 'SEO'], ['0', 'third-party scripts besides analytics']],
+      stack: ['HTML', 'CSS', 'SVG', 'JavaScript', 'GSAP', 'Cloudflare Workers AI', 'GitHub Pages']
+    }
+  },
+  it: {
+    open: 'Leggi il caso di studio', close: 'Nascondi il caso di studio',
+    h: { problem: 'Il problema', role: 'Il mio ruolo', how: 'Come funziona', sec: 'Sicurezza by design', res: 'Risultati', lim: 'Limiti dichiarati', stack: 'Tecnologie', site: 'Come è protetto questo sito', threat: 'Modello delle minacce dell’assistente', risk: 'Rischio', def: 'Difesa' },
+    p2: {
+      problem: 'In una piccola software house gran parte del tempo degli sviluppatori va in correzioni ripetitive e ben definite, sottraendolo al lavoro specialistico. L’obiettivo era affidare queste correzioni a un agente AI in modo sicuro, con ogni modifica testata e revisionata da una persona.',
+      role: 'L’ho progettato e realizzato da solo durante lo stage in Nabla2 (aprile–luglio 2026): la pipeline, i limiti di sicurezza e i test di benchmark.',
+      how: [
+        ['Etichetta e presa in carico', 'Uno sviluppatore etichetta una issue GitLab (ai-fix, ai-feature, ai-refactor o ai-task). Un passaggio di triage AI scarta le issue non adatte o troppo costose, poi blocca la issue così che due esecuzioni non possano lavorarci insieme.'],
+        ['Sandbox usa e getta', 'Il repository viene clonato in un container Docker temporaneo senza accesso alla rete.'],
+        ['Ciclo dell’agente', 'Un agente (mini-swe-agent con modelli Kimi / Moonshot) legge il codice e propone modifiche, iterando fino a trovare una correzione.'],
+        ['Verifica', 'Un controllo obbligatorio: tutti i test devono passare. Il nuovo comportamento si testa in modalità fail-first: il test fallisce prima della correzione e passa dopo.'],
+        ['Consegna e report', 'Solo allora crea un ramo, fa push, apre una merge request e scrive l’esito sulla issue. Una persona revisiona e fa il merge.']
+      ],
+      sec: ['Sandbox offline: il container dell’agente non ha accesso a internet.', 'Contenimento del token: il token di accesso viene rimosso dal remote git alla fine di ogni esecuzione.', 'Percorsi protetti: file e cartelle che l’agente non può mai modificare.', 'Tetti di costo: al massimo 1 $ per issue e 10 $ al giorno.', 'Revisione umana obbligatoria: nulla arriva al ramo principale senza l’approvazione di una persona.'],
+      stats: [['84%', 'issue completate (21 su 25)'], ['72%', 'risolte al primo tentativo'], ['0,78 $', 'costo medio per issue'], ['9 / 10', 'istanze SWE-bench (20 / 30 sul campione più ampio)']],
+      statsNote: 'Prova interna: 25 issue in 11 giorni, 86 tentativi in totale. SWE-bench è un benchmark costruito su issue reali di progetti open source, verificate dai loro test di regressione.',
+      lim: 'Le issue di prova interne erano generate da AI a difficoltà mista, quindi quei risultati sono indicativi, e il campione SWE-bench è troppo piccolo per avere valore statistico. La pipeline rende meglio su attività ben definite e circoscritte e dipende dalla copertura dei test esistenti. Riduce il lavoro ripetitivo; non sostituisce uno sviluppatore.',
+      stack: ['Python', 'Docker', 'GitLab API', 'mini-swe-agent', 'Kimi / Moonshot', 'Opzione con modello locale']
+    },
+    p1: {
+      problem: 'Il mio portfolio precedente era un classico sito a pagina singola. Volevo qualcosa che i recruiter ricordino, senza rendere più difficile trovare le informazioni.',
+      role: 'Concept, contenuti e decisioni sono miei. L’ho realizzato con un assistente AI per la programmazione (Claude), guidandolo e revisionando, testando e pubblicando ogni modifica.',
+      how: [
+        ['Una scrivania da esplorare', 'Ogni oggetto è una sezione, in una scena 3D fatta con HTML, CSS e SVG (senza WebGL), animata con GSAP.'],
+        ['Veloce per i recruiter', 'Un menu semplice, un link per saltare al contenuto e una versione testuale di ogni sezione, per chi vuole solo le informazioni.'],
+        ['Per tutti', 'Italiano e inglese, tema chiaro e scuro, navigazione da tastiera, movimento ridotto e una versione leggera per i dispositivi senza accelerazione grafica.']
+      ],
+      site: ['Content Security Policy: il browser esegue solo gli script di questo sito (quello inline è autorizzato tramite il suo hash) e lo script delle statistiche, e si collega solo all’assistente e alle statistiche.', 'Librerie ospitate sul sito: nessun codice caricato da CDN di terze parti.', 'Privacy: statistiche senza cookie e nessun dato dei visitatori salvato.'],
+      threat: [
+        ['Altri siti che usano l’assistente', 'Lista di origini consentite: risponde solo a questo sito.'],
+        ['Spam e costi', 'Limite di richieste per visitatore, e la quota gratuita giornaliera fa da tetto rigido senza addebiti.'],
+        ['Prompt injection («ignora le istruzioni»)', 'Fatti e regole stanno sul server; i falsi messaggi di sistema vengono scartati; le richieste fuori tema o di cambiare regole vengono rifiutate, ed è testato.'],
+        ['Fuga di dati', 'Il modello vede solo informazioni pubbliche su di me; le domande non vengono salvate.'],
+        ['Disservizio', 'Ritorno automatico alle risposte predefinite, così la chat non si blocca mai.']
+      ],
+      stats: [['99', 'performance Lighthouse (desktop)'], ['100', 'accessibilità'], ['100', 'SEO'], ['0', 'script di terze parti oltre alle statistiche']],
+      stack: ['HTML', 'CSS', 'SVG', 'JavaScript', 'GSAP', 'Cloudflare Workers AI', 'GitHub Pages']
+    }
+  }
+};
+function caseStudy(n, open) {
+  const C = CASES[lang] || CASES.en, c = C['p' + n], H = C.h;
+  const sec = (title, inner) => `<section class="csec"><h4>${esc(title)}</h4>${inner}</section>`;
+  const steps = `<ol class="csteps">${c.how.map(([a, b]) => `<li><b>${esc(a)}</b><span>${esc(b)}</span></li>`).join('')}</ol>`;
+  const stats = `<ul class="cstats">${c.stats.map(([v, l]) => `<li><b>${esc(v)}</b><span>${esc(l)}</span></li>`).join('')}</ul>`;
+  const list = (a) => `<ul class="clist">${a.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  let body = sec(H.problem, `<p>${esc(c.problem)}</p>`) + sec(H.role, `<p>${esc(c.role)}</p>`) + sec(H.how, steps);
+  if (n === 2) body += sec(H.sec, list(c.sec)) + sec(H.res, stats + `<p class="note">${esc(c.statsNote)}</p>`) + sec(H.lim, `<p>${esc(c.lim)}</p>`);
+  else body += sec(H.site, list(c.site)) + sec(H.threat, `<table class="cthreat"><thead><tr><th scope="col">${esc(H.risk)}</th><th scope="col">${esc(H.def)}</th></tr></thead><tbody>${c.threat.map(([r, d]) => `<tr><td>${esc(r)}</td><td>${esc(d)}</td></tr>`).join('')}</tbody></table>`) + sec(H.res, stats);
+  body += sec(H.stack, `<ul class="chips">${c.stack.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`);
+  return `<details class="case"${open ? ' open' : ''}><summary><span class="o">${esc(C.open)}</span><span class="c">${esc(C.close)}</span></summary><div class="cbody">${body}</div></details>`;
+}
+
 /* ---------- Content builders (panel + plain page share these) ---------- */
 const B = {
   about: () => `<p>${esc(t('about1'))}</p><p>${esc(t('about2'))}</p><h3>${esc(t('internships'))}</h3>
@@ -1191,13 +1317,13 @@ const B = {
   skills: () => [['sg1','s1'],['sg2','s2'],['sg3','s3'],['sg4','s4']].map(([g, s]) => `<h3>${esc(t(g))}</h3><ul class="chips">${t(s).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`).join(''),
   certs: () => `<p>${esc(t('certsNote'))}</p><ul class="certl">${CERTS.map((c) => { const [n, d] = c[lang] || c.en; return `<li><span class="cimg"><img src="${esc(c.img)}" alt="" width="56" height="56" loading="lazy" decoding="async" referrerpolicy="no-referrer" data-fallback="1"><svg width="34" height="38" viewBox="0 0 80 90" aria-hidden="true"><path d="M40 4L74 24V66L40 86L6 66V24Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/></svg></span><div><b>${esc(n)}</b><i>Cisco Networking Academy · ${esc(c.date)}</i><span>${esc(d)}</span><a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(t('verify'))} ↗</a></div></li>`; }).join('')}</ul>`,
   journey: () => `<ul class="tl">${t('journey').map((j) => `<li><i>${esc(j[0])}</i><b>${esc(j[1])}</b><span>${esc(j[2])}</span></li>`).join('')}</ul>`,
-  projects: () => `<div style="display:flex;flex-direction:column;gap:16px">
+  projects: (open) => `<div style="display:flex;flex-direction:column;gap:16px">
     <article class="proj"><div class="video"><img src="${esc(LINKS.shot)}" alt="${esc(t('shotAlt'))}" width="960" height="540" loading="lazy" decoding="async"></div>
       <h3 class="ph">${esc(t('p1n'))}</h3><div style="display:flex;flex-wrap:wrap;gap:8px"><span class="badge b-pub">${esc(t('p1b'))}</span></div>
-      <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul><p>${esc(t('p1x'))}</p><p><a class="llink2" href="${esc(LINKS.portfolio)}" target="_blank" rel="noopener">${esc(t('p1l'))} ↗</a></p></article>
+      <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul><p>${esc(t('p1x'))}</p><p><a class="llink2" href="${esc(LINKS.portfolio)}" target="_blank" rel="noopener">${esc(t('p1l'))} ↗</a></p>${caseStudy(1, open)}</article>
     <article class="proj"><div class="video">${videoTag()}</div><p class="note">${esc(t('p2v'))}</p>
       <h3 class="ph">${esc(t('p2n'))}</h3><div style="display:flex;flex-wrap:wrap;gap:8px"><span class="badge b-priv">${esc(t('p2b1'))}</span><span class="badge b-prod">${esc(t('p2b2'))}</span></div>
-      <p>${esc(t('p2x'))}</p><ul class="steps">${t('p2s').map((s) => `<li>${esc(s)}</li>`).join('')}</ul><p class="note">${esc(t('p2p'))}</p></article></div>`,
+      <p>${esc(t('p2x'))}</p><ul class="steps">${t('p2s').map((s) => `<li>${esc(s)}</li>`).join('')}</ul><p class="note">${esc(t('p2p'))}</p>${caseStudy(2, open)}</article></div>`,
   contact: () => `<p>${esc(t('contact1'))}</p>${[['cEmail','vEmail',LINKS.email],['cLinked','vLinked',LINKS.linkedin],['cGit','vGit',LINKS.github]].map(([l, v, u]) => `<div class="crow"><i>${esc(t(l))}</i><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t(v))}</a><button class="copy" type="button" data-copy="${esc(t(v))}">${esc(t('copy'))}</button></div>`).join('')}`,
   cv: () => `<p>${esc(t('cv1'))}</p><p><a class="btn" href="${esc(LINKS.cv)}" download="Abu-Bakar-Siddiq-CV.pdf">${esc(t('cvBtn'))}</a></p><p class="note">${esc(t('cvNote'))}</p>`,
   fun: () => { const f = t('facts'), n = f.length; return `<div class="fact"><p class="fnum" id="fnum">${esc(t('factN'))} ${factIdx + 1} / ${n}</p><p class="ftext" id="ftext" aria-live="polite">${esc(f[factIdx])}</p></div>
@@ -1215,7 +1341,7 @@ function renderPlain() {
   <section id="about"><p class="eb">${esc(t('n_about'))}</p><h2>${esc(t('aboutTitle'))}</h2><div class="cols"><div>${B.about()}</div><div><h3 class="eb" style="color:var(--muted)">${esc(t('lookTitle'))}</h3>${B.looking()}<h3 class="eb" style="color:var(--muted);margin-top:24px">${esc(t('cvTitle'))}</h3>${B.cv()}</div></div></section>
   <section id="skills"><p class="eb">${esc(t('n_skills'))}</p><h2>${esc(t('skillsTitle'))}</h2><div class="cols"><div>${B.skills()}</div><div><h3 class="eb" style="color:var(--muted)">${esc(t('certsTitle'))}</h3>${B.certs()}</div></div></section>
   <section id="journey"><p class="eb">${esc(t('n_journey'))}</p><h2>${esc(t('journeyTitle'))}</h2>${B.journey()}</section>
-  <section id="projects"><p class="eb">${esc(t('n_projects'))}</p><h2>${esc(t('projectsTitle'))}</h2>${B.projects().replace('flex-direction:column','flex-direction:row;flex-wrap:wrap').replace(/<article class="proj">/g,'<article class="proj" style="flex:1 1 340px">')}</section>
+  <section id="projects"><p class="eb">${esc(t('n_projects'))}</p><h2>${esc(t('projectsTitle'))}</h2>${B.projects(false).replace('flex-direction:column','flex-direction:row;flex-wrap:wrap;align-items:flex-start').replace(/<article class="proj">/g,'<article class="proj" style="flex:1 1 340px">')}</section>
   <section id="contact"><p class="eb">${esc(t('n_contact'))}</p><h2>${esc(t('contactTitle'))}</h2><div style="max-width:640px">${B.contact()}</div><p class="foot">${esc(t('foot'))}</p></section>`;
 }
 
@@ -1784,15 +1910,16 @@ function runCmd(raw, auto) {
   const L = (a) => `<a href="${esc(a[1])}" target="_blank" rel="noopener">${esc(a[0])}</a>`;
   switch (c) {
     case 'help':
-      tprint(`<span class="m">${esc(TT('Commands', 'Comandi'))}</span>\n  whoami      ${esc(TT('who I am', 'chi sono'))}\n  ls          ${esc(TT('list files', 'elenca i file'))}\n  projects    ${esc(TT('show my projects', 'mostra i progetti'))}\n  open 1 | 2  ${esc(TT('open a project', 'apri un progetto'))}\n  skills      ${esc(TT('what I work with', 'con cosa lavoro'))}\n  status      ${esc(TT('what I am looking for', 'cosa sto cercando'))}\n  contact     ${esc(TT('how to reach me', 'come contattarmi'))}\n  clear       ${esc(TT('clear the screen', 'pulisci lo schermo'))}\n  exit        ${esc(TT('back to the desk', 'torna alla scrivania'))}`); break;
+      tprint(`<span class="m">${esc(TT('Commands', 'Comandi'))}</span>\n  whoami      ${esc(TT('who I am', 'chi sono'))}\n  ls          ${esc(TT('list files', 'elenca i file'))}\n  projects    ${esc(TT('show my projects', 'mostra i progetti'))}\n  open 1 | 2  ${esc(TT('open a project', 'apri un progetto'))}\n  cat case-study  ${esc(TT('the AI workflow case study', 'il caso di studio del workflow AI'))}\n  skills      ${esc(TT('what I work with', 'con cosa lavoro'))}\n  status      ${esc(TT('what I am looking for', 'cosa sto cercando'))}\n  contact     ${esc(TT('how to reach me', 'come contattarmi'))}\n  clear       ${esc(TT('clear the screen', 'pulisci lo schermo'))}\n  exit        ${esc(TT('back to the desk', 'torna alla scrivania'))}`); break;
     case 'whoami':
       tprint(esc(TT('Abu Bakar Siddiq · System Cybersecurity Specialist (ITS Academy Olivetti, 2026). I build AI agents. Vignola, Modena.', 'Abu Bakar Siddiq · Specialista in Cybersecurity di sistema (ITS Academy Olivetti, 2026). Sviluppo agenti AI. Vignola, Modena.'))); break;
     case 'ls': case 'dir':
       if (arg.startsWith('projects')) tprint(`${pbtn(1, 'portfolio/')}   ${pbtn(2, 'ai-issue-resolver/')}  <span class="m">(private)</span>`);
-      else tprint(`<button type="button" data-cmd="projects">projects/</button>   <button type="button" data-cmd="cat about.txt">about.txt</button>   <button type="button" data-cmd="skills">skills.txt</button>   <button type="button" data-cmd="contact">contact.txt</button>`);
+      else tprint(`<button type="button" data-cmd="projects">projects/</button>   <button type="button" data-cmd="cat about.txt">about.txt</button>   <button type="button" data-cmd="skills">skills.txt</button>   <button type="button" data-cmd="contact">contact.txt</button>   <button type="button" data-cmd="cat case-study">case-study.md</button>`);
       break;
     case 'cat': case 'about':
-      if (c === 'about' || /about/.test(arg)) tprint(esc(t('about1')) + '\n' + esc(t('about2')));
+      if (/case/.test(arg)) { const c2 = (CASES[lang] || CASES.en).p2, H = (CASES[lang] || CASES.en).h; tprint(`<span class="c">${esc(t('p2n'))}</span>\n\n<span class="m">${esc(H.problem)}</span>\n${esc(c2.problem)}\n\n<span class="m">${esc(H.how)}</span>\n${c2.how.map(([a, b], i) => `  ${i + 1}. ${esc(a)}: ${esc(b)}`).join('\n')}\n\n<span class="m">${esc(H.sec)}</span>\n${c2.sec.map((x) => '  · ' + esc(x)).join('\n')}\n\n<span class="m">${esc(H.res)}</span>\n${c2.stats.map(([v, l]) => '  ' + esc(v) + '  ' + esc(l)).join('\n')}\n\n<span class="m">${esc(H.lim)}</span>\n${esc(c2.lim)}`); }
+      else if (c === 'about' || /about/.test(arg)) tprint(esc(t('about1')) + '\n' + esc(t('about2')));
       else if (/skill/.test(arg)) runSkills();
       else if (/contact/.test(arg)) runContact();
       else tprint(`<span class="e">cat: ${esc(arg || '?')}: ${esc(TT('no such file', 'file inesistente'))}</span>`);
@@ -1828,7 +1955,7 @@ function renderLapProj() {
   const back = `<button class="lback" type="button" data-open-p="0">← ~/projects</button>`;
   let h;
   if (lapView === 1) h = `<div class="ldet">${back}<h3>${esc(t('p1n'))}</h3><div class="lbadges"><em style="background:#00E5FF">${esc(t('p1b'))}</em></div><div class="lmedia"><img src="${esc(LINKS.shot)}" alt="" style="width:100%;height:100%;object-fit:cover"></div><ul class="lsteps"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>GSAP</li></ul><p>${esc(t('p1x'))}</p><p><a class="llink" href="${esc(LINKS.portfolio)}" target="_blank" rel="noopener">${esc(t('p1l'))} ↗</a></p></div>`;
-  else if (lapView === 2) h = `<div class="ldet">${back}<h3>${esc(t('p2n'))}</h3><div class="lbadges"><em style="background:#FFC93D">${esc(t('p2b1'))}</em><em style="background:#B6FF3B">${esc(t('p2b2'))}</em></div><div class="lmedia">${videoTag()}</div><p style="color:#6F86B0;font-size:8.5px">${esc(t('p2v'))}</p><p>${esc(t('p2x'))}</p><ul class="lsteps">${t('p2s').map((x) => `<li>${esc(x)}</li>`).join('')}</ul><p style="color:#6F86B0">${esc(t('p2p'))}</p></div>`;
+  else if (lapView === 2) h = `<div class="ldet">${back}<h3>${esc(t('p2n'))}</h3><div class="lbadges"><em style="background:#FFC93D">${esc(t('p2b1'))}</em><em style="background:#B6FF3B">${esc(t('p2b2'))}</em></div><div class="lmedia">${videoTag()}</div><p style="color:#6F86B0;font-size:8.5px">${esc(t('p2v'))}</p><p>${esc(t('p2x'))}</p><ul class="lsteps">${t('p2s').map((x) => `<li>${esc(x)}</li>`).join('')}</ul><ul class="lstats">${(CASES[lang] || CASES.en).p2.stats.map(([v, l]) => `<li><b>${esc(v)}</b><span>${esc(l)}</span></li>`).join('')}</ul><p style="color:#6F86B0">${esc(t('p2p'))} ${esc(TT("Type 'cat case-study' in the terminal for the full story.", "Scrivi 'cat case-study' nel terminale per la storia completa."))}</p></div>`;
   else h = `<div class="lgrid">${card(1)}${card(2)}</div><p class="lhint">${esc(TT('Click a project to open it. Prefer typing? Use the terminal tab.', 'Clicca un progetto per aprirlo. Preferisci scrivere? Usa la scheda terminal.'))}</p>`;
   $('#lvProj').innerHTML = h;
 }

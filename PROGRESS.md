@@ -3,7 +3,7 @@
 Read this first in any new session. It records what is decided, what is done and what comes next.
 
 - **Branch:** `redesign/animated-portfolio` (work here). `main` is the live site; changes reach it through a reviewed pull request.
-- **Last updated:** 2026-10-29
+- **Last updated:** 2026-10-30
 
 ## Status: live
 
@@ -15,7 +15,7 @@ Edit `src/desk.html` (the source), then run `python tools/build.py` from the rep
 
 ## What the site is
 
-A single self-contained `index.html` (HTML, CSS, SVG, GSAP 3.12.5 + ScrollTrigger from cdnjs). All text, English and Italian, lives inside the page's script; `content/content.json` is the old site's text, kept only as a reference.
+A single-page site built from `src/desk.html` (HTML, CSS, SVG, GSAP 3.12.5 + ScrollTrigger, self-hosted in `assets/js/`). All text, English and Italian, lives inside the page's script; `content/content.json` is the old site's text, kept only as a reference.
 
 | Object | Section | Interaction |
 |---|---|---|
@@ -59,8 +59,15 @@ GoatCounter (`https://abus1dd.goatcounter.com/count`), registered and counting. 
 
 - 2026-10-29: Lighthouse (lab, local server): desktop 99 performance / 100 accessibility / 100 SEO; mobile 83 / 100 / 100. Inline script minified, dragon image lazy-loaded, desk maths skipped while the desk is hidden.
 
+## Case studies
+
+- 2026-10-30: both projects have an expandable bilingual case study (problem, role, how it works, security, results, limits, stack), from the Nabla2 internship report and the ITS presentation. Client names and internal details are left out on purpose. The private project also says "More details are available on request". Laptop: results tiles on project 2 and `cat case-study` in the terminal. The assistant's facts include the results (needs `npx wrangler deploy` from `worker/`).
+
 ## Open items
 
 - [x] Register `abus1dd` on GoatCounter (done 2026-10-29; stats at https://abus1dd.goatcounter.com).
 - [x] LinkedIn preview checked with Post Inspector (2026-10-29): title, image and URL show correctly.
 - [x] Live AI assistant (2026-10-29): Worker `abu-assistant` deployed at https://abu-assistant.abus1dd.workers.dev (model `@cf/qwen/qwen3-30b-a3b-fp8`, rate limit 6/min). Site connected via `LINKS.assistant`. After editing `worker/src/index.js`, run `npx wrangler deploy` from `worker/`.
+- [ ] Proofread the English and Italian text (Abu).
+- [ ] Test on a real iPhone (Safari) and Android phone, and on Firefox (Abu).
+- [ ] Redeploy the assistant after facts changes: `cd worker` then `npx wrangler deploy` (Abu).
