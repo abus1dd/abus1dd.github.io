@@ -38,7 +38,7 @@ const FACTS = `Facts about Abu Bakar Siddiq (use only these):
 - Education: scientific high school diploma, applied sciences track, I.I.S. Primo Levi, Vignola (2019–2024).
 - Award: 2023 winner of "From Idea to Action", an entrepreneurial development program by The Doers in Vignola.
 - Looking for junior roles in penetration testing, security operations, security engineering or AI, in Emilia-Romagna; open to remote work with international teams.
-- Contact: email abubakarso2004@gmail.com, LinkedIn linkedin.com/in/abu-bakar-siddiq-, GitHub github.com/abus1dd. The CV (PDF) is in the CV folder on the desk.
+- Contact: email abubakarso2004@gmail.com, LinkedIn linkedin.com/in/abu-bakar-siddiq-, GitHub github.com/abus1dd. The CV (PDF, in Italian) is in the CV folder on the desk.
 - Light personal facts: grew up speaking Bengali; plays Apex Legends; built an AI that fixes bugs but always asks a human before merging.`;
 
 const SYSTEM = `You are the assistant on Abu Bakar Siddiq's portfolio website (abus1dd.github.io). Visitors are mostly recruiters.
