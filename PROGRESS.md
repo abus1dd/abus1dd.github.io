@@ -71,4 +71,4 @@ GoatCounter (`https://abus1dd.goatcounter.com/count`), registered and counting. 
 - [x] Live AI assistant (2026-10-29): Worker `abu-assistant` deployed at https://abu-assistant.abus1dd.workers.dev (model `@cf/qwen/qwen3-30b-a3b-fp8`, rate limit 6/min). Site connected via `LINKS.assistant`. After editing `worker/src/index.js`, run `npx wrangler deploy` from `worker/`.
 - [ ] Proofread the English and Italian text (Abu).
 - [ ] Test on a real iPhone (Safari) and Android phone, and on Firefox (Abu).
-- [x] Assistant redeployed with the case-study facts (2026-10-30). Redeploy again after any change to `worker/src/index.js`.
+- [x] Assistant redeployed with the case-study facts and "CV is in Italian" (2026-10-30). Redeploy again after any change to `worker/src/index.js`.
